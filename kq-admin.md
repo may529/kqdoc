@@ -6,7 +6,8 @@
 
 效果图
 
-![image-20241204222728428](/Users/majirong/Library/Application Support/typora-user-images/image-20241204222728428.png)
+<img width="682" alt="image" src="https://github.com/user-attachments/assets/c107a09f-3bfc-4963-b342-542f9d5767ac">
+
 
 ```
 import React from 'react';
@@ -40,7 +41,8 @@ export default () => (
 
 效果图
 
-![image-20241204223751253](/Users/majirong/Library/Application Support/typora-user-images/image-20241204223751253.png)
+<img width="122" alt="image" src="https://github.com/user-attachments/assets/488604e1-d6bf-432b-bf8b-71402b578871">
+
 
 ```
 import React from 'react';
@@ -61,7 +63,8 @@ export default () => (
 
 效果图
 
-![image-20241204224318175](/Users/majirong/Library/Application Support/typora-user-images/image-20241204224318175.png)
+<img width="126" alt="image" src="https://github.com/user-attachments/assets/3428c799-e55f-476e-8213-5281f436c9dc">
+
 
 ```
 import React from 'react';
@@ -109,7 +112,8 @@ options可以接受多种形式
 
 效果图
 
-![image-20241204225003937](/Users/majirong/Library/Application Support/typora-user-images/image-20241204225003937.png)
+<img width="232" alt="image" src="https://github.com/user-attachments/assets/e4443e12-b4ef-4ba7-b18b-b1651d576d81">
+
 
 ```
 import React from 'react';
@@ -151,7 +155,8 @@ export default () => (
 
 效果图
 
-![image-20241205034711795](/Users/majirong/Library/Application Support/typora-user-images/image-20241205034711795.png)
+<img width="325" alt="image" src="https://github.com/user-attachments/assets/f708d1d5-cbf1-4fa2-be3d-292dca356d00">
+
 
 ```
 import React from 'react';
@@ -197,7 +202,7 @@ export default () => (
 
 效果图
 
-![image-20241205034924463](/Users/majirong/Library/Application Support/typora-user-images/image-20241205034924463.png)
+<img width="152" alt="image" src="https://github.com/user-attachments/assets/57a8ebde-01e3-4721-a97a-4061571f6071">
 
 ```
 import React from 'react';
@@ -224,7 +229,8 @@ export default () => <DateShow>{new Date()}</DateShow>;
 
 效果图
 
-![image-20241205035144499](/Users/majirong/Library/Application Support/typora-user-images/image-20241205035144499.png)
+<img width="154" alt="image" src="https://github.com/user-attachments/assets/6258e8ff-38d8-4747-958b-a6a8412400f3">
+
 
 ```
 import React, { useState } from 'react';
@@ -275,7 +281,8 @@ export default () => {
 
 效果图
 
-![image-20241205042618331](/Users/majirong/Library/Application Support/typora-user-images/image-20241205042618331.png)
+<img width="263" alt="image" src="https://github.com/user-attachments/assets/1872e290-4919-459d-a4e6-11195f0ddf77">
+
 
 ```
 import React, { useState } from 'react';
@@ -292,7 +299,7 @@ export default () => {
 
 传入值之前可以不转为 `moment` 对象。
 
-![image-20241205042738560](/Users/majirong/Library/Application Support/typora-user-images/image-20241205042738560.png)
+<img width="230" alt="image" src="https://github.com/user-attachments/assets/1f35e53f-a1a2-4bf3-9a24-972776d7a11c">
 
 ```
 import React from 'react';
@@ -324,7 +331,8 @@ export default () => {
 
 效果图
 
-![image-20241205045138365](/Users/majirong/Library/Application Support/typora-user-images/image-20241205045138365.png)
+<img width="975" alt="image" src="https://github.com/user-attachments/assets/04c99d71-5f97-402a-93e4-c1b6599282f0">
+
 
 ```tsx
 import React from 'react';
@@ -352,7 +360,8 @@ export default () => (
 
 效果图
 
-![image-20241205045205740](/Users/majirong/Library/Application Support/typora-user-images/image-20241205045205740.png)
+<img width="973" alt="image" src="https://github.com/user-attachments/assets/cb193b45-3061-4a55-8f1f-1c083890a433">
+
 
 ```tsx
 import React from 'react';
@@ -396,7 +405,8 @@ export default () => (
 
 效果图
 
-![image-20241205051709772](/Users/majirong/Library/Application Support/typora-user-images/image-20241205051709772.png)
+<img width="786" alt="image" src="https://github.com/user-attachments/assets/0cf19fe0-d6b8-4751-934c-5bf23a0c81c9">
+
 
 ```tsx
 import React from 'react';
@@ -450,7 +460,8 @@ export default () => {
 
 效果图
 
-![image-20241205052606445](/Users/majirong/Library/Application Support/typora-user-images/image-20241205052606445.png)
+<img width="571" alt="image" src="https://github.com/user-attachments/assets/8fbdb861-2f20-4743-a4aa-2daf4cf4acfc">
+
 
 ```tsx
 import React from 'react';
@@ -551,7 +562,8 @@ export default () => (
 
 效果图
 
-![image-20241205052640480](/Users/majirong/Library/Application Support/typora-user-images/image-20241205052640480.png)
+<img width="560" alt="image" src="https://github.com/user-attachments/assets/20093261-855c-49a3-a384-cdc29dae042b">
+
 
 ```tsx
 import React from 'react';
@@ -591,7 +603,8 @@ export default () => {
 
 效果图
 
-![image-20241205052659581](/Users/majirong/Library/Application Support/typora-user-images/image-20241205052659581.png)
+<img width="358" alt="image" src="https://github.com/user-attachments/assets/d201967c-eb3f-41ec-95e9-a23a34c2cd91">
+
 
 ```tsx
 import React from 'react';
@@ -646,7 +659,8 @@ export default () => {
 
 效果图
 
-![image-20241205053032553](/Users/majirong/Library/Application Support/typora-user-images/image-20241205053032553.png)
+<img width="1009" alt="image" src="https://github.com/user-attachments/assets/c0e237c7-0fe4-4fca-ac01-49df78b6f01c">
+
 
 ```tsx
 /**
