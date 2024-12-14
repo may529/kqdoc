@@ -123,4 +123,62 @@ const App = (props) => {
       <Space style={{ marginRight: 10 }}>操作</Space>
 </Space>
 ```
+##### 网格布局
+
+分析布局：这类布局每个子项大小相同，比如4列网格布局，往往每个子项都占25%，占满一行后需要能自动换行 这里用flexWrap={'wrap'}。由于每个元素有间隔，往往需要在一行的最后一个元素不设置间隔。这里用ignoreNum={4}
+
+效果图：
+
+<img width="291" alt="image" src="https://github.com/user-attachments/assets/bbd3ec31-b617-44f9-ab64-c9faaafc60bd" />
+
+
+```
+  <Space ignoreNum={4} flexWrap={'wrap'} size={'14px'}>
+      {new Array(6).fill(0).map((_, i) => (
+        <Space
+          vertical
+          style={{ width: '25%' }}
+          size={'10px'}
+          alignItems={'center'}
+        >
+          <Space
+            style={{ width: '100%', height: '50px', background: '#eee' }}
+          />
+          <Space
+            style={{
+              width: '100%',
+              height: '10px',
+              background: '#eee',
+              marginBottom: '20px',
+            }}
+          />
+        </Space>
+      ))}
+   </Space>
+```
+
+#### API
+
+
+
+| 属性名     | 描述                                                  | 类型                                                         | 默认值    |
+| :--------- | :---------------------------------------------------- | :----------------------------------------------------------- | :-------- |
+| vertical   | 是否垂直                                              | `boolean`                                                    | `false`   |
+| children   | 子元素                                                | `ReactNode | ReactNodeArray`                                 | `-`       |
+| size       | 间距大小，字符串可以传入自定义单位，数字默认会转为rpx | `string | number`                                            | `-`       |
+| flex       | CSS的flex设置                                         | `Flex<0 | (string & {})>`                                    | `-`       |
+| justify    | CSS的justify设置                                      | `JustifyContent`                                             | `-`       |
+| alignItems | CSS的alignItems设置                                   | `AlignItems`                                                 | `stretch` |
+| alignSelf  | CSS的alignSelf设置                                    | `AlignSelf`                                                  | `-`       |
+| margin     | CSS的margin设置                                       | `number | "-moz-initial" | "inherit" | "initial" | "revert" | "unset" | "auto" | (string & {})` | `-`       |
+| padding    | CSS的padding设置                                      | `number | "-moz-initial" | "inherit" | "initial" | "revert" | "unset" | (string & {})` | `-`       |
+| flexWrap   | CSS的flexWrap设置                                     | `FlexWrap`                                                   | `-`       |
+| hidden     | -                                                     | `boolean`                                                    | `-`       |
+| ignoreNum  | 在一行第几个时不设置size                              | `number`                                                     | `-`       |
+| animation  | 由createAnimation创建的动画对象                       | `any`                                                        | `-`       |
+| style      | -                                                     | `CSSProperties`                                              | `-`       |
+| className  | -                                                     | `string`                                                     | `-`       |
+| ref        | -                                                     | `Ref<unknown>`                                               | `-`       |
+| key        | -                                                     | `Key`                                                        | `-`       |
+
 
