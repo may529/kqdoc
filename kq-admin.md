@@ -1,3 +1,60 @@
+# parsec-admin
+
+Parsec Admin
+
+基于 Antd 快速搭建中后台应用
+
+## 轻松上手
+
+快速创建一个简单的应用
+
+```bash
+// 创建一个目录是 my-app 的应用
+yarn create kqinfo-app my-app
+
+// 项目类型选择Admin
+> Admin
+
+// 预览项目
+$ cd my-app && yarn start
+```
+
+## 项目结构
+
+现在我们来看一下 my-app 应用的结构：
+
+```bash
+my-app/
+┳ package.json
+┣ node_modules/
+┣ public/
+┗━┓
+  ┣ index.html
+┣ src/
+┗━┓ App.tsx
+  ┣ configs/
+  ┗━┓
+    ┣ routes.tsx
+    ┣ apis.tsx
+  ┣ pages/
+  ┗━┓
+    ┣ home/
+    ┗━┓
+      ┣ index.tsx
+```
+
+`public/index.html` 为整个项目的索引 html ，可以配置页面 title/favicon 等。
+
+`src/` 为源文件目录。
+
+`App.tsx` 入口文件。
+
+`routes.tsx` 路由配置文件。
+
+`api.tsx` 接口配置文件。
+
+`pages/` 页面存放目录。
+
 # actionConfirm
 
 ## 操作确认
