@@ -56,6 +56,7 @@ const App = (props) => {
 - 代码中尽可能用CSS Modules，比如使用了 styles.xxx 这种方式来定义className
 - 尽量不要写内联样式
 - 表单组件暴露`value`和 onChange
+- 尽量不要用Image 当 Icon，能用Icon的尽量用Icon
 
 
 
