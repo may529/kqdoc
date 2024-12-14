@@ -55,6 +55,16 @@ my-app/
 
 `pages/` 页面存放目录。
 
+
+## 开发注意项
+
+- 样式不要嵌套
+- 样式用`less-modules`
+- 代码中尽可能用CSS Modules，比如使用了 styles.xxx 这种方式来定义className
+- 尽量不要写内联样式
+- 表单组件暴露`value`和 onChange
+- parsec-admin是基于antd封装的，当parsec-admin 组件不满足需求时，可使用antd组件来完成
+
 # actionConfirm
 
 ## 操作确认
