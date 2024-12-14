@@ -183,4 +183,37 @@ const App = (props) => {
 | ref        | -                                                     | `Ref<unknown>`                                               | `-`       |
 | key        | -                                                     | `Key`                                                        | `-`       |
 
+## Icon
+
+### 图标
+
+#### 一般用法
+
+效果图：
+
+<img width="32" alt="image" src="https://github.com/user-attachments/assets/25b4701e-febb-455c-87c6-d455237a2dbb" />
+
+
+```
+<Icon name={'kq-sousuo'} size={40} color={'#333'} />
+```
+
+图标库
+
+<img width="287" alt="image" src="https://github.com/user-attachments/assets/676b3690-4e63-470d-bb0a-53f8d3f0992b" />
+<img width="286" alt="image" src="https://github.com/user-attachments/assets/4caaaac4-0563-4a1d-ab5f-68238ebd2d2b" />
+<img width="292" alt="image" src="https://github.com/user-attachments/assets/26a9ca8f-007c-48a2-ad8e-b41e8c0b15b5" />
+<img width="289" alt="image" src="https://github.com/user-attachments/assets/9a2d4c9b-d157-4005-ad2c-f51483cec28c" />
+<img width="286" alt="image" src="https://github.com/user-attachments/assets/66b6d982-11dc-4255-9142-4d206defb691" />
+
+
+## API
+
+| 属性名    | 描述                                                      | 类型                | 默认值   |
+| :-------- | :-------------------------------------------------------- | :------------------ | :------- |
+| size      | 图标大小，默认是fontSize的值，传入number的话请输入rpx的值 | `string | number`   | `-`      |
+| className | -                                                         | `string`            | `-`      |
+| style     | -                                                         | `CSSProperties`     | `-`      |
+| name      | -                                                         | `IconFontNames`     | `(必选)` |
+| color     | -                                                         | `string | string[]` | `-`      |
 
