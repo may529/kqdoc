@@ -200,9 +200,10 @@ const App = (props) => {
 ```
 
 图标库：如下是图标所对应的name以及对应的效果图
-
-kq-search
-<img width="34" alt="image" src="https://github.com/user-attachments/assets/0e23661f-e6b4-467b-8895-d550b20e6533" />
+| name      | 图标效果图                                                |
+| :-------- | :-------------------------------------------------------- |
+| kq-search | <img width="35" alt="image" src="https://github.com/user-attachments/assets/2284da7c-2e7e-4b9f-8777-b8560c3b1e3c" /> |
+| kq-down | <img width="21" alt="image" src="https://github.com/user-attachments/assets/8ec19bb8-ca6e-47f8-8fc9-29ed7d1e52a0" /> |
 
 
 
