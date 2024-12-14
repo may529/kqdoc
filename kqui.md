@@ -199,7 +199,7 @@ const App = (props) => {
 <Icon name={'kq-sousuo'} size={40} color={'#333'} />
 ```
 
-图标库
+图标库：如下是图标所对应的name
 
 <img width="287" alt="image" src="https://github.com/user-attachments/assets/676b3690-4e63-470d-bb0a-53f8d3f0992b" />
 <img width="286" alt="image" src="https://github.com/user-attachments/assets/4caaaac4-0563-4a1d-ab5f-68238ebd2d2b" />
