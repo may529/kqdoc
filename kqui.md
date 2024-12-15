@@ -202,19 +202,17 @@ const App = (props) => {
 <Icon name={'kq-sousuo'} size={40} color={'#333'} />
 ```
 
-图标库：如下是图标所对应的name以及对应的效果图
-| name      | 图标效果图                                                |
-| :-------- | :-------------------------------------------------------- |
-| kq-search | <img width="35" alt="image" src="https://github.com/user-attachments/assets/2284da7c-2e7e-4b9f-8777-b8560c3b1e3c" /> |
-| kq-loading | <img width="29" alt="image" src="https://github.com/user-attachments/assets/b96d3563-4e76-47ce-b841-bd33c543d335" /> |
-| kq-down | <img width="21" alt="image" src="https://github.com/user-attachments/assets/8ec19bb8-ca6e-47f8-8fc9-29ed7d1e52a0" /> |
-| kq-loading2 | <img width="34" alt="image" src="https://github.com/user-attachments/assets/0054f7c8-7a7f-434a-b1cf-dae53f758d17" /> |
-| kq-yes | <img width="26" alt="image" src="https://github.com/user-attachments/assets/a3153396-6170-4491-83f7-cb0bce423159" /> |
-| kq-add | <img width="24" alt="image" src="https://github.com/user-attachments/assets/ea798de5-0054-4316-b0ca-6e2f8851d874" /> |
-| kq-clear | <img width="31" alt="image" src="https://github.com/user-attachments/assets/6cff80b9-a16c-4316-897e-a593d456f521" /> |
-| kq-clear2 | <img width="26" alt="image" src="https://github.com/user-attachments/assets/0126ef85-c8a4-4631-9dfb-5aa826c3645d" /> |
-| kq-notice | <img width="24" alt="image" src="https://github.com/user-attachments/assets/8d3a9b77-dd58-4fde-949f-a4b5eac54a9c" /> |
-| kq-zengjia | <img width="26" alt="image" src="https://github.com/user-attachments/assets/357895d8-826b-4c8e-aa53-8197c2a53d1f" /> |
+#### 图标库：如下是图标所对应的name以及对应的效果图
+
+
+|      |      |
+| ---- | ---- |
+|   <img width="291" alt="image" src="https://github.com/user-attachments/assets/b2126084-ead6-40c6-b7c2-338741473c62" />   |   <img width="282" alt="image" src="https://github.com/user-attachments/assets/3f51099c-5ba5-46ab-ac63-80c9918a093b" />   |
+|   <img width="284" alt="image" src="https://github.com/user-attachments/assets/e3b34089-24e1-466a-a45f-130dea8fc792" />
+   |   <img width="285" alt="image" src="https://github.com/user-attachments/assets/5bb5036e-2bc7-4e8a-828b-b22cd2f067c6" />
+   |
+|      |      |
+
 
 
 
