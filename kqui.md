@@ -226,3 +226,220 @@ const App = (props) => {
 | name      | -                                                         | `IconFontNames`     | `(必选)` |
 | color     | -                                                         | `string | string[]` | `-`      |
 
+
+## Button 
+
+### 按钮组件
+
+#### 按钮类型
+
+默认
+<img width="311" alt="image" src="https://github.com/user-attachments/assets/54df326e-7b4a-4b1d-8d80-614928ade7bd" />
+
+
+
+
+```
+<Button>默认</Button>
+```
+
+主题色按钮
+
+<img width="308" alt="image" src="https://github.com/user-attachments/assets/b46352a6-c83e-45ea-96e2-77893d17f6c6" />
+
+
+
+```
+<Button type={'primary'}>主题色按钮</Button>
+```
+
+醒目色按钮
+
+<img width="305" alt="image" src="https://github.com/user-attachments/assets/01a5d881-a4c6-4970-855e-6bcc4079a6de" />
+
+
+
+```
+<Button type={'attract'}>醒目色按钮</Button>
+```
+
+#### 幽灵按钮
+
+默认
+
+<img width="308" alt="image" src="https://github.com/user-attachments/assets/8f03cb97-3596-4399-9fc7-7bdc8dc302ac" />
+
+
+
+```
+<Button ghost>默认</Button>
+```
+
+主题色按钮
+
+<img width="309" alt="image" src="https://github.com/user-attachments/assets/1bee4876-8347-4e02-93a3-293f76121134" />
+
+
+
+```
+<Button type={'primary'} ghost>
+      主题色按钮
+</Button>
+```
+
+醒目色按钮
+
+<img width="309" alt="image" src="https://github.com/user-attachments/assets/9c7117a2-4e27-4382-9f57-c78bb218a2c9" />
+
+
+
+```
+<Button type={'attract'} ghost>
+      醒目色按钮
+</Button>
+```
+
+#### 阴影
+
+默认
+
+
+<img width="316" alt="image" src="https://github.com/user-attachments/assets/6f08a6e8-e96d-45f6-8d77-0c3f32fa8ea1" />
+
+
+```
+<Button shadow>默认</Button>
+```
+
+主题色按钮
+
+<img width="309" alt="image" src="https://github.com/user-attachments/assets/51153c2c-653e-4aeb-b2da-1d8f7e117a55" />
+
+
+
+```
+<Button type={'primary'} shadow>
+      主题色
+</Button>
+```
+
+醒目色按钮
+
+<img width="309" alt="image" src="https://github.com/user-attachments/assets/11924014-6b2c-4d47-b08e-d9636914c333" />
+
+
+
+```
+<Button type={'attract'} shadow>
+      醒目色
+</Button>
+```
+
+#### 
+
+#### 行内元素按钮
+
+默认/主题色按钮/醒目色按钮
+
+
+<img width="270" alt="image" src="https://github.com/user-attachments/assets/b5f181e3-2bc2-48c2-a4dd-213bd9c86ca3" />
+
+
+```
+<Button block={false}>默认</Button>
+<Button type={'primary'} block={false}>
+        主题色按钮
+</Button>
+<Button type={'attract'} block={false}>
+        醒目色按钮
+</Button>
+```
+
+#### 按钮大小
+
+小号/操作按钮/最小的按钮
+
+
+<img width="234" alt="image" src="https://github.com/user-attachments/assets/e77bd8a1-289a-4197-9458-496704a6712b" />
+
+
+```
+<Button size={'small'} block={false}>
+        小号
+</Button>
+<Button type={'primary'} size={'action'} block={false}>
+        操作按钮，大小跟小号差不多
+</Button>
+<Button type={'primary'} size={'tiny'} block={false}>
+        最小的按钮
+</Button>
+```
+
+#### 按钮组
+
+<img width="104" alt="image" src="https://github.com/user-attachments/assets/45166eb7-997d-403a-9104-e71b86ead946" />
+
+
+
+```
+<Button.Group>
+        <Button type={'primary'} size={'small'}>
+          提交
+        </Button>
+        <Button type={'attract'} size={'small'}>
+          返回
+        </Button>
+</Button.Group>
+```
+
+圆角按钮组
+
+<img width="102" alt="image" src="https://github.com/user-attachments/assets/15ea5a51-5276-4eea-a90d-e63068b10a2a" />
+
+
+```
+<Button.Group>
+        <Button type={'primary'} size={'small'}>
+          提交
+        </Button>
+        <Button type={'attract'} size={'small'}>
+          返回
+        </Button>
+</Button.Group>
+```
+#### 按钮加载中
+
+<img width="315" alt="image" src="https://github.com/user-attachments/assets/aaaca3ff-f36d-4642-a419-a5935f919d97" />
+
+
+
+```
+ <Button loading>默认</Button>
+ <Button loading type={'primary'}>
+      主题色按钮
+ </Button>
+ <Button loading type={'attract'}>
+      醒目色按钮
+ </Button>
+```
+
+
+
+## API
+
+| 属性名    | 描述                                             | 类型                                     | 默认值    |
+| :-------- | :----------------------------------------------- | :--------------------------------------- | :-------- |
+| block     | 是否是行内元素                                   | `boolean`                                | `true`    |
+| size      | 按钮大小                                         | `"normal" | "small" | "action" | "tiny"` | `normal`  |
+| shadow    | 阴影                                             | `boolean`                                | `false`   |
+| type      | 类型                                             | `"default" | "primary" | "attract"`      | `default` |
+| ghost     | 镂空                                             | `boolean`                                | `false`   |
+| icon      | 图标                                             | `ReactNode`                              | `-`       |
+| bold      | 粗体                                             | `boolean`                                | `false`   |
+| disabled  | 禁用                                             | `boolean`                                | `false`   |
+| round     | 是否是圆形按钮                                   | `boolean`                                | `false`   |
+| loading   | 是否是加载状态                                   | `boolean`                                | `false`   |
+| elderly   | 适老模式，开启后不同type的按钮文字和尺寸都会变大 | `boolean`                                | `-`       |
+| style     | -                                                | `CSSProperties`                          | `-`       |
+| className | -                                                | `string`                                 | `-`       |
+
