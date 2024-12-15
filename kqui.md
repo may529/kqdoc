@@ -66,6 +66,8 @@ const App = (props) => {
 
 ## Space
 
+### 布局组件
+
 用于各种布局分割的组件，如果没有效果请确保`children`支持`style`的 prop，
 
 默认情况Space 具有flex 横向布局
@@ -184,9 +186,10 @@ const App = (props) => {
 | ref        | -                                                     | `Ref<unknown>`                                               | `-`       |
 | key        | -                                                     | `Key`                                                        | `-`       |
 
-## Icon
 
-### 图标
+## Icon 
+
+### 图标组件
 
 #### 一般用法
 
