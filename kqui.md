@@ -178,11 +178,11 @@ const App = (props) => {
 | margin     | CSS的margin设置                                       | `number | "-moz-initial" | "inherit" | "initial" | "revert" | "unset" | "auto" | (string & {})` | `-`       |
 | padding    | CSS的padding设置                                      | `number | "-moz-initial" | "inherit" | "initial" | "revert" | "unset" | (string & {})` | `-`       |
 | flexWrap   | CSS的flexWrap设置                                     | `FlexWrap`                                                   | `-`       |
-| hidden     | -                                                     | `boolean`                                                    | `-`       |
+| hidden     | 是否隐藏                                                     | `boolean`                                                    | `-`       |
 | ignoreNum  | 在一行第几个时不设置size                              | `number`                                                     | `-`       |
 | animation  | 由createAnimation创建的动画对象                       | `any`                                                        | `-`       |
-| style      | -                                                     | `CSSProperties`                                              | `-`       |
-| className  | -                                                     | `string`                                                     | `-`       |
+| style      | 行内样式                                                     | `CSSProperties`                                              | `-`       |
+| className  | 样式名                                                     | `string`                                                     | `-`       |
 | ref        | -                                                     | `Ref<unknown>`                                               | `-`       |
 | key        | -                                                     | `Key`                                                        | `-`       |
 
@@ -221,10 +221,10 @@ const App = (props) => {
 | 属性名    | 描述                                                      | 类型                | 默认值   |
 | :-------- | :-------------------------------------------------------- | :------------------ | :------- |
 | size      | 图标大小，默认是fontSize的值，传入number的话请输入rpx的值 | `string | number`   | `-`      |
-| className | -                                                         | `string`            | `-`      |
-| style     | -                                                         | `CSSProperties`     | `-`      |
-| name      | -                                                         | `IconFontNames`     | `(必选)` |
-| color     | -                                                         | `string | string[]` | `-`      |
+| className | 样式名                                                         | `string`            | `-`      |
+| style     | 行内样式                                                        | `CSSProperties`     | `-`      |
+| name      | 图标name                                                         | `IconFontNames`     | `(必选)` |
+| color     | 图标颜色                                                         | `string | string[]` | `-`      |
 
 
 ## Button 
@@ -440,6 +440,6 @@ const App = (props) => {
 | round     | 是否是圆形按钮                                   | `boolean`                                | `false`   |
 | loading   | 是否是加载状态                                   | `boolean`                                | `false`   |
 | elderly   | 适老模式，开启后不同type的按钮文字和尺寸都会变大 | `boolean`                                | `-`       |
-| style     | -                                                | `CSSProperties`                          | `-`       |
-| className | -                                                | `string`                                 | `-`       |
+| style     | 行内样式                                               | `CSSProperties`                          | `-`       |
+| className | 样式名                                               | `string`                                 | `-`       |
 
