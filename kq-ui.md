@@ -64,9 +64,9 @@ const App = (props) => {
 
 ### 组件
 
-## Space
+## 布局组件
 
-### 布局组件
+### Space
 
 用于各种布局分割的组件，如果没有效果请确保`children`支持`style`的 prop，
 
@@ -187,9 +187,9 @@ const App = (props) => {
 | key        | -                                                     | `Key`                                                        | `-`       |
 
 
-## Icon 
+## 图标组件
 
-### 图标组件
+### Icon 
 
 #### 一般用法
 
@@ -227,9 +227,9 @@ const App = (props) => {
 | color     | 图标颜色                                                         | `string | string[]` | `-`      |
 
 
-## Button 
+## 按钮组件
 
-### 按钮组件
+### Button 
 
 #### 按钮类型
 
