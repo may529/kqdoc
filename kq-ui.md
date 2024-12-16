@@ -270,10 +270,83 @@ const App = (props) => {
 | lazyLoad    | 图片懒加载，只在小程序有效 | `boolean`                                                    | `-`    |
 | onLoad      | 当图片载入完毕时触发       | `(e: Event) => void`                                         | `-`    |
 | onError     | 当错误发生时触发           | `(e: Event) => void`                                         | `-`    |
-| className   | -                          | `string`                                                     | `-`    |
-| style       | -                          | `CSSProperties`                                              | `-`    |
+| className   | 样式名                          | `string`                                                     | `-`    |
+| style       | 行内样式                          | `CSSProperties`                                              | `-`    |
 | src         | 图片资源地址               | `string`                                                     | `-`    |
 | mode        | 图片裁剪、缩放的模式       | `"scaleToFill" | "aspectFit" | "aspectFill" | "widthFix" | "top" | "bottom" | "center" | "left" | "right" | "top left" | "top right" | "bottom left" | "bottom right"` | `-`    |
+
+
+
+## 条形码组件
+
+### BarCode 
+
+#### 一般用法
+
+效果图：
+
+<img width="162" alt="image" src="https://github.com/user-attachments/assets/b9245f35-94b8-41da-9d0e-658f0775a057" />
+
+
+
+```
+<BarCode content={'233'} style={{ width: 200, height: 200 }} />
+  
+```
+
+#### API
+
+| 属性名    | 描述       | 类型            | 默认值   |
+| :-------- | :--------- | :-------------- | :------- |
+| content   | 条形码内容 | `string`        | `(必选)` |
+| width     | 条码宽度   | `number`        | `-`      |
+| height    | 条码高度   | `number`        | `-`      |
+| webProps  | -          | `any`           | `-`      |
+| className | 样式名     | `string`        | `-`      |
+| style     | 行内样式   | `CSSProperties` | `-`      |
+
+
+## 二维码组件
+
+### QrCode
+
+#### 一般用法
+
+效果图：
+
+<img width="167" alt="image" src="https://github.com/user-attachments/assets/45795892-3336-4305-8206-a5e347f38566" />
+
+
+
+```
+<QrCode
+        content={'233'}
+        style={{ width: 200, height: 200 }}
+        showModal
+        modalTitle={'二维码弹窗'}
+      />
+  
+```
+
+#### API
+
+| 属性名      | 描述                 | 类型                                                         | 默认值   |
+| :---------- | :------------------- | :----------------------------------------------------------- | :------- |
+| content     | 二维码内容           | `string`                                                     | `(必选)` |
+| darkColor   | 二维码码的颜色       | `string`                                                     | `-`      |
+| lightColor  | 二维码背景颜色       | `string`                                                     | `-`      |
+| onSetSrc    | 设置二维码回调       | `(src: string) => void`                                      | `-`      |
+| longTapSave | 长按保存             | `boolean`                                                    | `-`      |
+| showModal   | 点击显示弹窗         | `boolean`                                                    | `-`      |
+| modalTitle  | 弹窗标题             | `ReactNode`                                                  | `-`      |
+| onLoad      | 当图片载入完毕时触发 | `(e: Event) => void`                                         | `-`      |
+| onError     | 当错误发生时触发     | `(e: Event) => void`                                         | `-`      |
+| className   | -                    | `string`                                                     | `-`      |
+| style       | -                    | `CSSProperties`                                              | `-`      |
+| src         | 图片资源地址         | `string`                                                     | `-`      |
+| mode        | 图片裁剪、缩放的模式 | `"scaleToFill" | "aspectFit" | "aspectFill" | "widthFix" | "top" | "bottom" | "center" | "left" | "right" | "top left" | "top right" | "bottom left" | "bottom right"` | `-`      |
+| ref         | -                    | `Ref<unknown>`                                               | `-`      |
+| key         | -                    | `Key`                                                        | `-`      |
 
 
 
