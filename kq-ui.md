@@ -187,6 +187,96 @@ const App = (props) => {
 | key        | -                                                     | `Key`                                                        | `-`       |
 
 
+## 背景图组件
+
+### BackgroundImage 
+
+#### 一般用法
+
+效果图：
+
+<img width="346" alt="image" src="https://github.com/user-attachments/assets/38dd7000-8e03-429d-aecd-d0fd1e6c00d2" />
+
+
+
+```
+<BackgroundImg
+        img={bg}
+        className={styles.topBackground}
+        imgProps={{
+          style: { width: '100%', height: '100%' },
+        }}>
+        <Space className={styles.topbox} size={20}>
+          <Image src={avtor} className={styles.avtor} />
+          <Space flex={1} vertical size={20}>
+            <Space className={styles.name}>
+              王嘉琪
+            </Space>
+            <Space className={styles.phone}>
+              138****9966
+            </Space>
+          </Space>
+         </Space>
+</BackgroundImg>
+```
+
+#### API
+| 属性名         | 描述            | 类型            | 默认值 |
+| :------------- | :-------------- | :-------------- | :----- |
+| imgProps       | 图片的props     | `ImageProps`    | `-`    |
+| img            | 背景图          | `string`        | `-`    |
+| innerProps     | 里层view的props | `ViewProps`     | `-`    |
+| isPreviewImage | -               | `boolean`       | `-`    |
+| className      | 样式名               | `string`        | `-`    |
+| style          | 行内样式              | `CSSProperties` | `-`    |
+
+
+## 图片组件
+
+### Image 
+
+#### 一般用法
+
+效果图：
+
+<img width="95" alt="image" src="https://github.com/user-attachments/assets/f992690e-ca7c-40b3-81b5-3304d9f8756d" />
+
+
+
+
+```
+<Image src={CommonImg.doctor} style={{ width: 100, height: 100 }} />
+  
+```
+#### 默认占位图
+
+效果图：
+
+<img width="87" alt="image" src="https://github.com/user-attachments/assets/198e78a4-8277-4742-9fca-37e754ce0cb1" />
+
+
+
+```
+<Image style={{ width: 100, height: 100 }} />
+  
+```
+
+#### API
+
+| 属性名      | 描述                       | 类型                                                         | 默认值 |
+| :---------- | :------------------------- | :----------------------------------------------------------- | :----- |
+| placeholder | 占位图片                   | `string | false`                                             | `-`    |
+| preview     | 支持预览                   | `boolean`                                                    | `true` |
+| lazyLoad    | 图片懒加载，只在小程序有效 | `boolean`                                                    | `-`    |
+| onLoad      | 当图片载入完毕时触发       | `(e: Event) => void`                                         | `-`    |
+| onError     | 当错误发生时触发           | `(e: Event) => void`                                         | `-`    |
+| className   | -                          | `string`                                                     | `-`    |
+| style       | -                          | `CSSProperties`                                              | `-`    |
+| src         | 图片资源地址               | `string`                                                     | `-`    |
+| mode        | 图片裁剪、缩放的模式       | `"scaleToFill" | "aspectFit" | "aspectFill" | "widthFix" | "top" | "bottom" | "center" | "left" | "right" | "top left" | "top right" | "bottom left" | "bottom right"` | `-`    |
+
+
+
 ## 图标组件
 
 ### Icon 
