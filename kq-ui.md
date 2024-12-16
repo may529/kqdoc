@@ -606,3 +606,186 @@ const App = (props) => {
 | style     | 行内样式                                               | `CSSProperties`                          | `-`       |
 | className | 样式名                                               | `string`                                 | `-`       |
 
+## 分块标题组件
+
+### PartTitle
+
+#### 一般用法
+
+效果图：
+
+<img width="318" alt="image" src="https://github.com/user-attachments/assets/3443b366-386c-4eca-8bd2-e6461e072e7b" />
+
+
+
+```
+    <PartTitle>一般用法</PartTitle>
+    <PartTitle required>必填</PartTitle>
+    <PartTitle required bold={false}>
+      必填细体
+    </PartTitle>
+    <PartTitle required bold={false} full>
+      填充字体颜色
+    </PartTitle>
+    <PartTitle required bold={false} round>
+      圆角
+    </PartTitle>
+    <PartTitle
+      required
+      bold={false}
+      full
+      action={<Button type={'action'}>操作</Button>}
+    >
+      操作按钮
+    </PartTitle>
+  
+```
+
+#### API
+
+| 属性名    | 描述                       | 类型            | 默认值 |
+| :-------- | :------------------------- | :-------------- | :----- |
+| required  | 显示必填的星号             | `boolean`       | `-`    |
+| bold      | 是否加粗文字               | `boolean`       | `true` |
+| className | -                          | `string`        | `-`    |
+| full      | 是否填充字体颜色           | `boolean`       | `-`    |
+| offsetX   | 左边偏移量，rpx单位        | `number`        | `-`    |
+| elderly   | 适老模式，开启后尺寸会变大 | `boolean`       | `-`    |
+| action    | 标题右侧操作               | `ReactNode`     | `-`    |
+| style     | 样式                       | `CSSProperties` | `-`    |
+| round     | 圆角样式                   | `boolean`       | `-`    |
+
+
+## 温馨提示题组件
+
+### Tip
+
+#### 一般用法
+
+效果图：
+
+<img width="314" alt="image" src="https://github.com/user-attachments/assets/9c42fe73-69c6-4df4-a28e-ecedf5da5c56" />
+
+
+
+```
+   <Tip
+      items={[
+        <Space style={{ color: '#D95E38', marginBottom: 20 }}>
+          请在预约时间段内携带本人身份证前往医院登记台完成登记与接种
+        </Space>,
+        '1、3-7天之内不宜饮酒',
+        '2、不宜剧烈运动，应注意休息',
+        '3、一周内避免接触个人既往过敏物及常见致敏源',
+        '4、一周内不宜进食辛辣刺激或海鲜类食物，建议清淡饮食',
+      ]}
+    />
+  
+```
+
+#### API
+
+| 属性名     | 描述                                                  | 类型                                                         | 默认值       |
+| :--------- | :---------------------------------------------------- | :----------------------------------------------------------- | :----------- |
+| items      | 提示项                                                | `ReactNode[]`                                                | `(必选)`     |
+| title      | 提示标题                                              | `ReactNode`                                                  | `温馨提示：` |
+| iconColor  | 图标颜色                                              | `string`                                                     | `#FABD52`    |
+| icon       | 图标                                                  | `ReactNode`                                                  | `kq-tip`     |
+| elderly    | 适老模式，开启后尺寸会变大                            | `boolean`                                                    | `-`          |
+| vertical   | 是否垂直                                              | `boolean`                                                    | `false`      |
+| children   | 子元素                                                | `ReactNode | ReactNodeArray`                                 | `-`          |
+| size       | 间距大小，字符串可以传入自定义单位，数字默认会转为rpx | `string | number`                                            | `-`          |
+| flex       | CSS的flex设置                                         | `Flex<0 | (string & {})>`                                    | `-`          |
+| justify    | CSS的justify设置                                      | `JustifyContent`                                             | `-`          |
+| alignItems | CSS的alignItems设置                                   | `AlignItems`                                                 | `stretch`    |
+| alignSelf  | CSS的alignSelf设置                                    | `AlignSelf`                                                  | `-`          |
+| margin     | CSS的margin设置                                       | `number | "-moz-initial" | "inherit" | "initial" | "revert" | "unset" | "auto" | (string & {})` | `-`          |
+| padding    | CSS的padding设置                                      | `number | "-moz-initial" | "inherit" | "initial" | "revert" | "unset" | (string & {})` | `-`          |
+| flexWrap   | CSS的flexWrap设置                                     | `FlexWrap`                                                   | `-`          |
+| hidden     | -                                                     | `boolean`                                                    | `-`          |
+| ignoreNum  | 在一行第几个时不设置size                              | `number`                                                     | `-`          |
+| animation  | 由createAnimation创建的动画对象                       | `any`                                                        | `-`          |
+| style      | -                                                     | `CSSProperties`                                              | `-`          |
+| className  | -                                                     | `string`                                                     | `-`          |
+
+#### 自定义类名
+
+| 属性名   | 描述     | 类型     | 默认值 |
+| :------- | :------- | :------- | :----- |
+| textCls  | 文字类名 | `string` | `-`    |
+| iconCls  | 图标类名 | `string` | `-`    |
+| titleCls | 标题类名 | `string` | `-`    |
+
+
+## 时间线组件
+
+### TimeLine
+
+#### 一般用法
+
+效果图：
+
+<img width="314" alt="image" src="https://github.com/user-attachments/assets/f7976167-5ad1-42fb-a71f-b72fcbcf5e5c" />
+
+
+
+
+```
+    <TimeLine
+      data={[
+        {
+          state: 'done',
+          title: '已签收',
+          detail: '您的订单已由本人签收，感谢您在xx购物，欢迎再次光临',
+          date: '2019-05-03 12:11:18',
+        },
+        {
+          state: 'pending',
+          title: '派送中',
+          detail: (
+            <Text>
+              您的快递正在派送中，快递员xx，电话
+              <ColorText>1234568978</ColorText>
+            </Text>
+          ),
+          date: '2019-05-03 11:11:11',
+        },
+        {
+          state: 'pending',
+          title: '运输中',
+          detail: '您的订单已到达【重庆中渝广场】',
+          date: '2019-05-03 09:10:25',
+        },
+        {
+          state: 'pending',
+          title: '运输中',
+          detail: '您的订单已揽件',
+          date: '2019-05-01 11:11:11',
+        },
+      ]}
+    />
+  
+```
+
+#### API
+
+| 属性名    | 描述           | 类型            | 默认值   |
+| :-------- | :------------- | :-------------- | :------- |
+| className | -              | `string`        | `-`      |
+| data      | 菜单数据       | `Data[]`        | `(必选)` |
+| style     | 样式           | `CSSProperties` | `-`      |
+| doneIcon  | 自定义完成图标 | `ReactNode`     | `-`      |
+
+#### 自定义类名
+
+| 属性名      | 描述             | 类型     | 默认值 |
+| :---------- | :--------------- | :------- | :----- |
+| dotCls      | 时间点类名       | `string` | `-`    |
+| doneIconCls | 完成图标类名     | `string` | `-`    |
+| lineCls     | 线类名           | `string` | `-`    |
+| titleCls    | 标题类名         | `string` | `-`    |
+| detailCls   | 详情类名         | `string` | `-`    |
+| dateCls     | 日期类名         | `string` | `-`    |
+| activeCls   | 当前时间详情类名 | `string` | `-`    |
+| itemCls     | 子项类名         | `string` | `-`    |
+
