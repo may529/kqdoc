@@ -398,9 +398,31 @@ showModal={true}
 
 
 
-## 图标组件
+# Icon 图标组件
 
-### Icon 
+一个跨平台的图标组件,支持自定义大小、颜色,并对loading图标提供了自动旋转效果。
+
+## 使用示例
+```
+import {Icon} from '@kqinfo/ui';
+
+// 基础用法
+<Icon name="home" />
+// 自定义颜色和大小
+<Icon
+name="user"
+color="#1890ff"
+size={32} // 这里传入的是rpx值
+/>
+// 使用其他CSS单位
+<Icon
+name="settings"
+size="2em"
+/>
+// Loading图标(自动旋转)
+<Icon name="kq-loading" />
+
+```
 
 #### 一般用法
 
@@ -438,11 +460,46 @@ showModal={true}
 | color     | 图标颜色                                                         | `string | string[]` | `-`      |
 
 
-## 按钮组件
+## 特殊说明
 
-### Button 
+1. size属性说明:
+   - 传入number类型时按rpx单位处理
+   - 传入string类型时直接作为CSS尺寸值使用
+   - 默认值为'1em'
 
-#### 按钮类型
+2. 自动旋转:
+   - 当图标name为'kq-loading'或'kq-loading2'时会自动添加旋转动画
+
+3. 平台兼容:
+   - 在微信小程序中会自动处理rpx/px单位转换
+   - 其他平台保持原有单位
+
+4. 样式覆盖:
+   - 可以通过className和style属性进行自定义样式设置
+   - 组件最外层会添加wrap类名
+   - 图标本身会添加icon类名
+
+## 注意事项
+
+1. 在设置size时,建议:
+   - 需要固定大小时使用number类型(rpx单位)
+   - 需要响应式大小时使用em/rem等相对单位
+
+2. 组件内部会根据平台自动处理单位转换,使用时只需关注业务逻辑
+
+   
+
+
+
+# Button 按钮组件
+
+通用按钮组件,支持多种样式类型和状态。
+
+## 引入
+
+```
+import { Button } from '@kqinfo/ui';
+```
 
 默认
 <img width="311" alt="image" src="https://github.com/user-attachments/assets/54df326e-7b4a-4b1d-8d80-614928ade7bd" />
