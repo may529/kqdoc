@@ -693,23 +693,41 @@ import { Button } from '@kqinfo/ui';
 
 
 
-#### API
+## API
 
-| 属性名    | 描述                                             | 类型                                     | 默认值    |
-| :-------- | :----------------------------------------------- | :--------------------------------------- | :-------- |
-| block     | 是否是行内元素                                   | `boolean`                                | `true`    |
-| size      | 按钮大小                                         | `"normal" | "small" | "action" | "tiny"` | `normal`  |
-| shadow    | 阴影                                             | `boolean`                                | `false`   |
-| type      | 类型                                             | `"default" | "primary" | "attract"`      | `default` |
-| ghost     | 镂空                                             | `boolean`                                | `false`   |
-| icon      | 图标                                             | `ReactNode`                              | `-`       |
-| bold      | 粗体                                             | `boolean`                                | `false`   |
-| disabled  | 禁用                                             | `boolean`                                | `false`   |
-| round     | 是否是圆形按钮                                   | `boolean`                                | `false`   |
-| loading   | 是否是加载状态                                   | `boolean`                                | `false`   |
-| elderly   | 适老模式，开启后不同type的按钮文字和尺寸都会变大 | `boolean`                                | `-`       |
-| style     | 行内样式                                               | `CSSProperties`                          | `-`       |
-| className | 样式名                                               | `string`                                 | `-`       |
+### Props
+
+| 参数 | 说明 | 类型 | 默认值 |
+| --- | --- | --- | --- |
+| type | 按钮类型,可选值为 `default` `primary` `attract` | string | `default` |
+| size | 按钮尺寸,可选值为 `tiny` `small` `normal` `action` | string | `normal` |
+| block | 是否为块级元素 | boolean | `true` |
+| ghost | 是否为镂空按钮 | boolean | `false` |
+| disabled | 是否禁用 | boolean | `false` |
+| loading | 是否显示加载状态 | boolean | `false` |
+| round | 是否为圆形按钮 | boolean | `false` |
+| shadow | 是否显示阴影 | boolean | `false` |
+| bold | 是否使用粗体 | boolean | `false` |
+| elderly | 是否开启适老模式 | boolean | `false` |
+| icon | 图标 | ReactNode | - |
+| className | 自定义类名 | string | - |
+| style | 自定义样式 | CSSProperties | - |
+| onTap | 点击事件 | function | - |
+
+### Button.Group Props
+
+Button.Group 继承了 Space 组件的所有属性。
+
+| 参数 | 说明 | 类型 | 默认值 |
+| --- | --- | --- | --- |
+| className | 自定义类名 | string | - |
+
+## 注意事项
+
+1. 按钮文字过长时会自动换行
+2. 开启适老模式后,按钮文字和尺寸会变大
+3. 使用 loading 状态时会自动禁用按钮点击
+
 
 ## 分块标题组件
 
@@ -894,3 +912,330 @@ import { Button } from '@kqinfo/ui';
 | activeCls   | 当前时间详情类名 | `string` | `-`    |
 | itemCls     | 子项类名         | `string` | `-`    |
 
+
+# Step 步骤条组件
+
+Step 是一个用于展示步骤/流程的组件，支持自定义样式和交互。
+
+## 基础用法
+
+```
+  import { Step } from '@kqinfo/ui';
+export default () => (
+<Step
+current={2}
+items={['第一步', '第二步', '第三步']}
+/>
+);
+  
+```
+
+## 虚线样式
+
+```
+import { Step } from '@kqinfo/ui';
+export default () => (
+<Step
+type="dashed"
+current={2}
+items={['第一步', '第二步', '第三步']}
+/>
+);
+```
+
+## 自定义渲染
+
+```
+import { Step } from '@kqinfo/ui';
+export default () => (
+<Step
+current={2}
+items={[
+(active) => ({
+icon: <Icon name="custom-icon" />,
+text: active ? '已完成' : '第一步'
+}),
+'第二步',
+'第三步'
+]}
+/>
+);
+
+```
+
+
+## API
+
+### Props
+
+| 参数 | 说明 | 类型 | 默认值 |
+| --- | --- | --- | --- |
+| current | 当前步骤索引，从1开始 | `number` | - |
+| type | 预置样式类型 | `'normal' \| 'dashed'` | `'normal'` |
+| items | 步骤配置项 | `(ReactNode \| ((active: boolean) => {icon: ReactNode, text: ReactNode}))[]` | - |
+| activeColor | 激活状态的颜色 | `string` | `'#fff'` |
+| backgroundColor | 背景颜色 | `string` | `brandPrimary` |
+| defaultColor | 默认文字/图标颜色 | `string` | - |
+| onChoose | 步骤点击事件 | `(index: number) => void` | - |
+| className | 容器类名 | `string` | - |
+| style | 容器样式 | `CSSProperties` | - |
+| itemCls | 步骤项类名 | `string` | - |
+| activeItemCls | 激活状态的步骤项类名 | `string` | - |
+| dotCls | 圆点类名 | `string` | - |
+| lineCls | 连接线类名 | `string` | - |
+| activeLineCls | 激活状态的连接线类名 | `string` | - |
+
+### items 类型说明
+
+items 数组的每一项可以是:
+
+1. ReactNode - 直接渲染的内容
+2. (active: boolean) => {icon, text} - 函数返回对象:
+   - icon: 自定义图标
+   - text: 步骤文本
+
+## 注意事项
+
+1. current 从1开始计数
+2. type="dashed" 时会显示虚线连接
+3. 可以通过 activeColor 和 backgroundColor 配置主题色
+4. items 支持函数式配置，可以根据激活状态动态渲染
+
+
+# Divider 分割线
+
+一个用于分隔内容的组件,支持在内容两侧显示分割线。
+
+## 代码示例
+
+### 基础用法
+
+```
+import { Divider } from '@kqinfo/ui';
+export default () => (
+<Divider>分割文本</Divider>
+);
+```
+
+
+### 自定义颜色
+
+```
+import { Divider } from '@kqinfo/ui';
+export default () => (
+<Divider color="#f00">红色分割线</Divider>
+);
+```
+
+### 隐藏分割线
+
+```
+import { Divider } from '@kqinfo/ui';
+export default () => (
+<Divider hideLine>仅显示文本</Divider>
+);
+```
+
+
+## API
+
+| 参数 | 说明 | 类型 | 默认值 |
+| --- | --- | --- | --- |
+| children | 分割线中的内容 | ReactNode | - |
+| color | 分割线和文本的颜色 | string | brandPrimary |
+| style | 自定义样式 | CSSProperties | - |
+| lineCls | 分割线的自定义类名 | string | - |
+| hideLine | 是否隐藏分割线 | boolean | false |
+
+此外还支持 Space 组件的全部属性。
+
+## 注意事项
+
+1. 组件默认使用品牌主色(brandPrimary)作为分割线和文本颜色
+2. 文本字号默认为 30rpx
+3. 分割线宽度为 1px
+4. 组件基于 Space 组件实现,默认居中对齐
+
+# ListItem 列表项组件
+
+一个灵活的列表项组件，支持左侧图片、多行文本内容以及右侧额外内容的展示。
+
+## 组件结构
+
++----------------+------------------------+-------------+
+| | title subtitle | |
+| image | text | after |
+| imgFooter | footer | |
++----------------+------------------------+-------------+
+
+
+## 属性说明
+
+### 基础属性
+| 属性 | 说明 | 类型 | 默认值 |
+|------|------|------|--------|
+| className | 容器类名 | string | - |
+
+### 左侧区域
+| 属性 | 说明 | 类型 | 默认值 |
+|------|------|------|--------|
+| img | 图片地址 | string | - |
+| imgCls | 图片类名 | string | - |
+| imgFooter | 图片下方内容 | ReactNode | - |
+| imgFooterCls | 图片下方内容类名 | string | - |
+| leftSpaceProps | 左侧区域Space组件属性 | SpaceProps | - |
+
+### 中间区域
+| 属性 | 说明 | 类型 | 默认值 |
+|------|------|------|--------|
+| title | 标题内容 | ReactNode | - |
+| titleCls | 标题类名 | string | - |
+| subtitle | 副标题内容 | ReactNode | - |
+| subtitleCls | 副标题类名 | string | - |
+| text | 正文内容 | ReactNode | - |
+| textCls | 正文类名 | string | - |
+| footer | 底部内容 | ReactNode | - |
+| footerCls | 底部内容类名 | string | - |
+| rightSpaceProps | 中间区域Space组件属性 | SpaceProps | - |
+
+### 右侧区域
+| 属性 | 说明 | 类型 | 默认值 |
+|------|------|------|--------|
+| after | 右侧内容 | ReactNode | - |
+| afterCls | 右侧内容类名 | string | - |
+
+## 使用示例
+```
+import {ListItem} from '@kqinfo/ui';
+export default () => {
+return (
+<ListItem
+img="https://example.com/image.jpg"
+imgFooter="图片说明"
+title="标题文本"
+subtitle="副标题"
+text="正文内容"
+footer="底部文字"
+after="右侧内容"
+/>
+);
+};
+```
+
+
+## 样式定制
+
+组件提供了丰富的类名支持，可以通过以下类名进行样式定制：
+
+- `.item` - 整个列表项容器
+- `.img` - 图片
+- `.imgFooter` - 图片下方内容
+- `.title` - 标题区域
+- `.subtitle` - 副标题
+- `.text` - 正文
+- `.footer` - 底部内容
+
+## 注意事项
+
+1. 组件基于 Space 组件构建，继承了 Space 组件的所有属性
+2. 图片默认使用 `aspectFill` 模式展示
+3. 所有内容区域都支持传入 ReactNode，可以灵活定制
+
+
+# List 列表组件
+
+一个功能强大的列表组件,支持加载更多、虚拟滚动、状态管理等特性。
+
+## 特性
+
+- 支持下拉加载更多
+- 支持虚拟滚动优化性能
+- 内置加载中、空数据、加载失败等状态处理
+- 支持数据缓存
+- 灵活的自定义渲染
+
+## 代码示例
+
+### 基础用法
+
+```
+import { List } from '@kqinfo/ui';
+export default () => {
+// 获取列表数据
+const getList = async ({ page, limit }) => {
+const res = await fetch(/api/list?page=${page}&limit=${limit});
+return res.json();
+};
+return (
+<List
+getList={getList}
+renderItem={(item, index) => (
+<div key={item.id}>
+{index}: {item.name}
+</div>
+)}
+/>
+);
+};
+```
+
+### 虚拟滚动
+
+当列表项较多时,可以开启虚拟滚动优化性能:
+```
+<List
+getList={getList}
+renderItem={renderItem}
+renderItemHeight={(item) => 100} // 设置每项高度(rpx)
+/>
+```
+
+### 自定义样式
+
+```
+<List
+getList={getList}
+renderItem={renderItem}
+space={{ gap: 10 }} // Space 组件配置
+noData={<Empty />} // 自定义空状态
+noMore="没有更多了" // 自定义没有更多提示
+loadingTip={<Loading />} // 自定义加载提示
+/>
+```
+
+
+## Props
+
+| 参数 | 说明 | 类型 | 默认值 |
+| --- | --- | --- | --- |
+| getList | 获取列表数据的函数 | `(params: { page: number, limit: number }) => Promise<D[]>` | - |
+| renderItem | 渲染列表项 | `(data: D, index: number, list: D[], refreshList: () => void) => ReactElement` | - |
+| renderItemHeight | 虚拟滚动时每项高度 | `(data: D, index: number) => number` | - |
+| cacheKey | 数据缓存的key | `string` | 当前页面路径 |
+| noData | 空数据时的提示 | `ReactNode` | `<NoData/>` |
+| noMore | 没有更多时的提示 | `ReactNode` | - |
+| loadingTip | 加载提示 | `ReactNode` | `<Loading type="inline"/>` |
+| defaultLimit | 每页数量 | `number` | 10 |
+| space | Space组件配置 | `SpaceProps` | - |
+| style | 自定义样式 | `CSSProperties` | - |
+| className | 自定义类名 | `string` | - |
+
+## 方法
+
+通过 ref 可以调用组件方法:
+```
+const listRef = useRef();
+// 刷新列表
+listRef.current.refreshList();
+<List ref={listRef} {...props} />
+```
+
+| 方法名 | 说明 | 参数 |
+| --- | --- | --- |
+| refreshList | 刷新列表数据 | `(retainList?: boolean) => Promise<void>` |
+
+## 注意事项
+
+1. 虚拟滚动模式下需要正确设置 renderItemHeight
+2. getList 返回的数据项需要包含唯一的 id 字段
+3. 建议合理使用 cacheKey 来缓存数据,提升用户体验
