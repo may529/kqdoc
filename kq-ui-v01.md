@@ -917,6 +917,9 @@ Button.Group 继承了 Space 组件的所有属性。
 
 Step 是一个用于展示步骤/流程的组件，支持自定义样式和交互。
 
+<img width="299" alt="image" src="https://github.com/user-attachments/assets/0ff9b8b5-f16b-472d-aa7f-9bc76af19cfa" />
+
+
 ## 基础用法
 
 ```
@@ -1006,6 +1009,8 @@ items 数组的每一项可以是:
 
 一个用于分隔内容的组件,支持在内容两侧显示分割线。
 
+<img width="156" alt="image" src="https://github.com/user-attachments/assets/5688f811-1425-4241-b7ca-65d3768485f2" />
+
 ## 代码示例
 
 ### 基础用法
@@ -1059,6 +1064,9 @@ export default () => (
 # ListItem 列表项组件
 
 一个灵活的列表项组件，支持左侧图片、多行文本内容以及右侧额外内容的展示。
+
+<img width="317" alt="image" src="https://github.com/user-attachments/assets/6963accb-de79-41ca-998a-0d408e0e0453" />
+
 
 ## 组件结构
 
