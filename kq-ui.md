@@ -64,289 +64,337 @@ const App = (props) => {
 
 ### 组件
 
-## 布局组件
+# Space 间距组件
 
-### Space
+Space 组件可以在子元素之间添加间距，支持水平和垂直方向布局。
 
-用于各种布局分割的组件，如果没有效果请确保`children`支持`style`的 prop，
+## 引入
 
-默认情况Space 具有flex 横向布局
-
-##### 横排布局
-
-效果图：
-
-<img width="305" alt="image" src="https://github.com/user-attachments/assets/b539facb-5c27-456c-854b-fe363db12935" />
-
-
+```tsx
+import { Space } from '@kqinfo/ui';
 ```
-<Space size={'10px'}> //size是Space内各子元素的间隔
-      <Button block={false}>1</Button>
-      <Button>2</Button>
-      <Button type={'primary'}>3</Button>
+
+## 基础用法
+
+### 水平间距
+
+```tsx
+<Space size={16}>
+  <View>元素1</View>
+  <View>元素2</View>
+  <View>元素3</View>
 </Space>
 ```
 
-##### 竖排布局
+### 垂直间距
 
-效果图：
-
-<img width="307" alt="image" src="https://github.com/user-attachments/assets/d8a4e755-1785-4845-800d-7d05069174b6" />
-
-
-
-```
-<Space vertical size={'10px'} alignItems={'flex-start'}> //vertical代表竖排布局，alignItems相当于 align-items
-      <Button block={false}>1</Button>
-      <Button>2</Button>
-      <Button type={'primary'}>3</Button>
+```tsx
+<Space size={16} vertical>
+  <View>元素1</View>
+  <View>元素2</View>
+  <View>元素3</View>
 </Space>
 ```
 
-我们来构建一个列表子项的布局试试
+### 自定义间距大小
 
-##### 列表子项布局
-
-分析布局：子项分左中右布局。各子项垂直居中对齐，水平间隔10px，左边项宽高固定。中间项宽度弹性布局。右边项固定大小
-
-效果图：
-
-<img width="301" alt="image" src="https://github.com/user-attachments/assets/acc58ef9-c57c-44ff-807f-65c48ed24e2d" />
-
-
-```
-<Space
-      size={'10px'}
-      style={{ background: '#fff', color: '#333' }}
-      alignItems={'center'}
-    >
-      <div style={{ background: '#eee', width: 50, height: 50 }} />
-      <Space flex={1} size={'10px'} vertical>
-        <Space>名称</Space>
-        <Space>描述</Space>
-      </Space>
-      <Space style={{ marginRight: 10 }}>操作</Space>
+```tsx
+// 使用数字(单位:rpx)
+<Space size={20}>
+  <View>元素1</View>
+  <View>元素2</View>
+</Space>
+// 使用字符串(可指定单位)
+<Space size="16px">
+  <View>元素1</View>
+  <View>元素2</View>
 </Space>
 ```
-##### 网格布局
 
-分析布局：这类布局每个子项大小相同，比如4列网格布局，往往每个子项都占25%，占满一行后需要能自动换行 这里用flexWrap={'wrap'}。由于每个元素有间隔，往往需要在一行的最后一个元素不设置间隔。这里用ignoreNum={4}
+## Props
 
-效果图：
+| 参数       | 说明                              | 类型                        | 默认值    |
+| ---------- | --------------------------------- | --------------------------- | --------- |
+| vertical   | 是否垂直布局                      | `boolean`                   | `false`   |
+| size       | 间距大小，数字默认单位为 rpx      | `string | number`           | -         |
+| flex       | CSS 的 flex 属性                  | `Property.Flex`             | -         |
+| justify    | CSS 的 justify-content 属性       | `Property.JustifyContent`   | -         |
+| alignItems | CSS 的 align-items 属性           | `Property.AlignItems`       | `stretch` |
+| alignSelf  | CSS 的 align-self 属性            | `Property.AlignSelf`        | -         |
+| margin     | CSS 的 margin 属性                | `Property.Margin | number`  | -         |
+| padding    | CSS 的 padding 属性               | `Property.Padding | number` | -         |
+| flexWrap   | CSS 的 flex-wrap 属性             | `Property.FlexWrap`         | -         |
+| hidden     | 是否隐藏                          | `boolean`                   | `false`   |
+| ignoreNum  | 在一行第几个时不设置间距          | `number`                    | -         |
+| animation  | 由 createAnimation 创建的动画对象 | `any`                       | -         |
 
-<img width="291" alt="image" src="https://github.com/user-attachments/assets/bbd3ec31-b617-44f9-ab64-c9faaafc60bd" />
+组件还支持以下原生属性:
 
+- className
+- style
+- id
+- onTap
+- onTouchStart
+- onTouchMove
+- onTouchEnd
+- onTouchCancel
+- onLongTap
+
+## 注意事项
+
+1. size 属性传入数字时会自动转换为 rpx 单位
+2. 在微信小程序中字符串类型的 size 会自动转为大写
+3. 组件会自动过滤掉 undefined、null、false、''等无效的子元素
+4. 支持 Fragment 语法
+
+# BackgroundImage 背景图组件
+
+一个简单的背景图容器组件,支持图片预览、自定义内容等功能。
+
+## 使用示例
+
+### 基础用法
 
 ```
-  <Space ignoreNum={4} flexWrap={'wrap'} size={'14px'}>
-      {new Array(6).fill(0).map((_, i) => (
-        <Space
-          vertical
-          style={{ width: '25%' }}
-          size={'10px'}
-          alignItems={'center'}
-        >
-          <Space
-            style={{ width: '100%', height: '50px', background: '#eee' }}
-          />
-          <Space
-            style={{
-              width: '100%',
-              height: '10px',
-              background: '#eee',
-              marginBottom: '20px',
-            }}
-          />
-        </Space>
-      ))}
-   </Space>
+import {BackgroundImg} from '@kqinfo/ui';
+export default () => {
+return (
+<BackgroundImg
+img="https://example.com/bg.jpg"
+>
+  <View>内容</View>
+</BackgroundImg>
+);
+}
 ```
 
-#### API
-
-
-
-| 属性名     | 描述                                                  | 类型                                                         | 默认值    |
-| :--------- | :---------------------------------------------------- | :----------------------------------------------------------- | :-------- |
-| vertical   | 是否垂直                                              | `boolean`                                                    | `false`   |
-| children   | 子元素                                                | `ReactNode | ReactNodeArray`                                 | `-`       |
-| size       | 间距大小，字符串可以传入自定义单位，数字默认会转为rpx | `string | number`                                            | `-`       |
-| flex       | CSS的flex设置                                         | `Flex<0 | (string & {})>`                                    | `-`       |
-| justify    | CSS的justify设置                                      | `JustifyContent`                                             | `-`       |
-| alignItems | CSS的alignItems设置                                   | `AlignItems`                                                 | `stretch` |
-| alignSelf  | CSS的alignSelf设置                                    | `AlignSelf`                                                  | `-`       |
-| margin     | CSS的margin设置                                       | `number | "-moz-initial" | "inherit" | "initial" | "revert" | "unset" | "auto" | (string & {})` | `-`       |
-| padding    | CSS的padding设置                                      | `number | "-moz-initial" | "inherit" | "initial" | "revert" | "unset" | (string & {})` | `-`       |
-| flexWrap   | CSS的flexWrap设置                                     | `FlexWrap`                                                   | `-`       |
-| hidden     | 是否隐藏                                                     | `boolean`                                                    | `-`       |
-| ignoreNum  | 在一行第几个时不设置size                              | `number`                                                     | `-`       |
-| animation  | 由createAnimation创建的动画对象                       | `any`                                                        | `-`       |
-| style      | 行内样式                                                     | `CSSProperties`                                              | `-`       |
-| className  | 样式名                                                     | `string`                                                     | `-`       |
-| ref        | -                                                     | `Ref<unknown>`                                               | `-`       |
-| key        | -                                                     | `Key`                                                        | `-`       |
-
-
-## 背景图组件
-
-### BackgroundImage 
-
-#### 一般用法
-
-效果图：
-
-<img width="346" alt="image" src="https://github.com/user-attachments/assets/38dd7000-8e03-429d-aecd-d0fd1e6c00d2" />
-
-
+### 支持图片预览
 
 ```
 <BackgroundImg
-        img={bg}
-        className={styles.topBackground}
-        imgProps={{
-          style: { width: '100%', height: '100%' },
-        }}>
-        <Space className={styles.topbox} size={20}>
-          <Image src={avtor} className={styles.avtor} />
-          <Space flex={1} vertical size={20}>
-            <Space className={styles.name}>
-              王嘉琪
-            </Space>
-            <Space className={styles.phone}>
-              138****9966
-            </Space>
-          </Space>
-         </Space>
+img="https://example.com/bg.jpg"
+isPreviewImage
+>
+点击可预览图片
 </BackgroundImg>
 ```
 
-#### API
-| 属性名         | 描述            | 类型            | 默认值 |
-| :------------- | :-------------- | :-------------- | :----- |
-| imgProps       | 图片的props     | `ImageProps`    | `-`    |
-| img            | 背景图          | `string`        | `-`    |
-| innerProps     | 里层view的props | `ViewProps`     | `-`    |
-| isPreviewImage | -               | `boolean`       | `-`    |
-| className      | 样式名               | `string`        | `-`    |
-| style          | 行内样式              | `CSSProperties` | `-`    |
-
-
-## 图片组件
-
-### Image 
-
-#### 一般用法
-
-效果图：
-
-<img width="95" alt="image" src="https://github.com/user-attachments/assets/f992690e-ca7c-40b3-81b5-3304d9f8756d" />
-
-
-
+### 自定义样式
 
 ```
-<Image src={CommonImg.doctor} style={{ width: 100, height: 100 }} />
-  
-```
-#### 默认占位图
-
-效果图：
-
-<img width="87" alt="image" src="https://github.com/user-attachments/assets/198e78a4-8277-4742-9fca-37e754ce0cb1" />
-
-
-
-```
-<Image style={{ width: 100, height: 100 }} />
-  
-```
-
-#### API
-
-| 属性名      | 描述                       | 类型                                                         | 默认值 |
-| :---------- | :------------------------- | :----------------------------------------------------------- | :----- |
-| placeholder | 占位图片                   | `string | false`                                             | `-`    |
-| preview     | 支持预览                   | `boolean`                                                    | `true` |
-| lazyLoad    | 图片懒加载，只在小程序有效 | `boolean`                                                    | `-`    |
-| onLoad      | 当图片载入完毕时触发       | `(e: Event) => void`                                         | `-`    |
-| onError     | 当错误发生时触发           | `(e: Event) => void`                                         | `-`    |
-| className   | 样式名                          | `string`                                                     | `-`    |
-| style       | 行内样式                          | `CSSProperties`                                              | `-`    |
-| src         | 图片资源地址               | `string`                                                     | `-`    |
-| mode        | 图片裁剪、缩放的模式       | `"scaleToFill" | "aspectFit" | "aspectFill" | "widthFix" | "top" | "bottom" | "center" | "left" | "right" | "top left" | "top right" | "bottom left" | "bottom right"` | `-`    |
-
-
-
-## 条形码组件
-
-### BarCode 
-
-#### 一般用法
-
-效果图：
-
-<img width="162" alt="image" src="https://github.com/user-attachments/assets/b9245f35-94b8-41da-9d0e-658f0775a057" />
-
-
-
-```
-<BarCode content={'233'} style={{ width: 200, height: 200 }} />
-  
+<BackgroundImg
+img="https://example.com/bg.jpg"
+className={styles.customwrap}
+imgProps={{
+className: {styles.customImg},
+mode: 'aspectFit'
+}}
+innerProps={{
+className: {styles.customInner}
+}}
+>
+自定义样式
+</BackgroundImg>
 ```
 
-#### API
+## Props
 
-| 属性名    | 描述       | 类型            | 默认值   |
-| :-------- | :--------- | :-------------- | :------- |
-| content   | 条形码内容 | `string`        | `(必选)` |
-| width     | 条码宽度   | `number`        | `-`      |
-| height    | 条码高度   | `number`        | `-`      |
-| webProps  | -          | `any`           | `-`      |
-| className | 样式名     | `string`        | `-`      |
-| style     | 行内样式   | `CSSProperties` | `-`      |
+| 参数           | 说明                                  | 类型            | 默认值 |
+| -------------- | ------------------------------------- | --------------- | ------ |
+| img            | 背景图片URL                           | string          | -      |
+| imgProps       | 图片的props,继承自Image组件的所有属性 | ImageProps      | -      |
+| innerProps     | 内层View的props                       | ViewProps       | -      |
+| isPreviewImage | 是否开启图片预览功能                  | boolean         | false  |
+| className      | 外层容器的类名                        | string          | -      |
+| children       | 子元素                                | React.ReactNode | -      |
 
+组件还支持传入所有View组件的属性。
 
-## 二维码组件
+## 注意事项
 
-### QrCode
+1. 背景图片默认采用 `scaleToFill` 模式,可通过 `imgProps.mode` 修改
+2. 点击事件会自动阻止冒泡
+3. 开启图片预览功能后,点击会调用预览图片API
+4. 内部采用相对定位,图片和内容层都是绝对定位
 
-#### 一般用法
+#  Image 组件
 
-效果图：
+基于 remax/wechat 的 Image 组件封装,增强了图片预览、占位图等功能。
 
-<img width="167" alt="image" src="https://github.com/user-attachments/assets/45795892-3336-4305-8206-a5e347f38566" />
-
-
+##  使用示例
 
 ```
+import {Image} from '@kqinfo/ui';
+export default () => {
+return (
+<Image
+src="https://example.com/image.jpg"
+preview={true}
+placeholder="https://example.com/placeholder.jpg"
+onTap={(e) => {
+console.log('image tapped');
+}}
+onError={(e) => {
+console.log('image load failed');
+}}
+/>
+);
+}
+```
+
+## Props
+
+| 参数        | 说明                         | 类型            | 默认值 |
+| ----------- | ---------------------------- | --------------- | ------ |
+| src         | 图片地址                     | string          | -      |
+| preview     | 是否支持预览                 | boolean         | false  |
+| placeholder | 加载失败时显示的占位图片地址 | string          | -      |
+| onTap       | 点击事件回调                 | (event) => void | -      |
+| onError     | 加载失败回调                 | (event) => void | -      |
+
+其他属性将透传给 remax/wechat 的 Image 组件。
+
+## 特性
+
+- 支持图片预览功能
+- 支持加载失败后显示占位图
+- 默认使用 aspectFill 模式展示图片
+- 支持点击和错误事件处理
+
+## 注意事项
+
+1. preview 和 onTap 可以同时使用,此时会先触发预览,再执行 onTap 回调
+2. 图片加载失败时,会先尝试显示 placeholder 图片,再触发 onError 回调
+
+
+
+# 条形码组件
+
+一个基于 JsBarcode 的 React 条形码生成组件。
+
+## 安装
+
+```
+npm install jsbarcode
+```
+
+## 使用示例
+
+```
+import {BarCode} from '@kqinfo/ui';
+export default () => {
+return (
+<BarCode
+content="123456789"
+style={{ width: '300px', height: '100px' }}
+webProps={{
+fontSize: 20,
+width: 1.5
+}}
+/>
+);
+}
+```
+
+## API
+
+### 参数
+
+| 参数     | 说明             | 类型            | 默认值 |
+| -------- | ---------------- | --------------- | ------ |
+| content  | 条形码内容       | `string`        | -      |
+| style    | 容器样式         | `CSSProperties` | -      |
+| webProps | JsBarcode 配置项 | `object`        | -      |
+
+### webProps 配置项
+
+| 参数         | 说明                   | 类型      | 默认值 |
+| ------------ | ---------------------- | --------- | ------ |
+| displayValue | 是否显示条形码原始值   | `boolean` | `true` |
+| textMargin   | 条形码和文本之间的间距 | `number`  | `5`    |
+| fontSize     | 文本大小               | `number`  | `30`   |
+| width        | 条之间的宽度           | `number`  | `2`    |
+
+更多 JsBarcode 配置项请参考: [JsBarcode Options](https://github.com/lindell/JsBarcode/wiki/Options)
+
+## 注意事项
+
+1. 组件会自动将条形码设置为容器的 100% 宽高
+2. 条形码默认带有白色背景
+3. content 参数为必填项
+
+
+# QR Code 组件
+
+一个支持点击展示弹窗的二维码组件。
+
+## 使用示例
+
+```
+import { QrCode } from '@kqinfo/ui';
+export default () => {
+return (
 <QrCode
-        content={'233'}
-        style={{ width: 200, height: 200 }}
-        showModal
-        modalTitle={'二维码弹窗'}
-      />
-  
+content="https://example.com"
+showModal={true}
+modalTitle="二维码"
+onTap={(e) => {
+console.log('QR code clicked');
+}}
+/>
+);
+}
 ```
 
-#### API
+## API
 
-| 属性名      | 描述                 | 类型                                                         | 默认值   |
-| :---------- | :------------------- | :----------------------------------------------------------- | :------- |
-| content     | 二维码内容           | `string`                                                     | `(必选)` |
-| darkColor   | 二维码码的颜色       | `string`                                                     | `-`      |
-| lightColor  | 二维码背景颜色       | `string`                                                     | `-`      |
-| onSetSrc    | 设置二维码回调       | `(src: string) => void`                                      | `-`      |
-| longTapSave | 长按保存             | `boolean`                                                    | `-`      |
-| showModal   | 点击显示弹窗         | `boolean`                                                    | `-`      |
-| modalTitle  | 弹窗标题             | `ReactNode`                                                  | `-`      |
-| onLoad      | 当图片载入完毕时触发 | `(e: Event) => void`                                         | `-`      |
-| onError     | 当错误发生时触发     | `(e: Event) => void`                                         | `-`      |
-| className   | -                    | `string`                                                     | `-`      |
-| style       | -                    | `CSSProperties`                                              | `-`      |
-| src         | 图片资源地址         | `string`                                                     | `-`      |
-| mode        | 图片裁剪、缩放的模式 | `"scaleToFill" | "aspectFit" | "aspectFill" | "widthFix" | "top" | "bottom" | "center" | "left" | "right" | "top left" | "top right" | "bottom left" | "bottom right"` | `-`      |
-| ref         | -                    | `Ref<unknown>`                                               | `-`      |
-| key         | -                    | `Key`                                                        | `-`      |
+### Props
+
+| 参数       | 说明                 | 类型                 | 默认值  |
+| ---------- | -------------------- | -------------------- | ------- |
+| content    | 二维码内容           | `string`             | -       |
+| showModal  | 是否支持点击展示弹窗 | `boolean`            | `false` |
+| modalTitle | 弹窗标题             | `string`             | -       |
+| onTap      | 点击二维码的回调函数 | `(e: Event) => void` | -       |
+
+### Ref
+
+组件支持通过 ref 调用以下方法:
+
+```
+interface QrCodeRef {
+setVisible: (visible: boolean) => void; // 控制弹窗显示/隐藏
+}
+```
+
+示例:
+
+```
+import { QrCode } from '@kqinfo/ui';
+import { useRef } from 'react';
+export default () => {
+const qrRef = useRef<QrCodeRef>(null);
+return (
+<>
+<QrCode
+ref={qrRef}
+content="https://example.com"
+showModal={true}
+/>
+<button onClick={() => qrRef.current?.setVisible(true)}>
+显示二维码
+</button>
+</>
+);
+}
+```
+
+## 注意事项
+
+1. 当 `showModal` 为 `true` 时,点击二维码会自动显示弹窗
+2. 可以通过 ref 手动控制弹窗的显示/隐藏
+3. `onTap` 回调会在点击二维码时触发,无论是否显示弹窗
+
 
 
 
