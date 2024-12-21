@@ -78,6 +78,9 @@ import { Space } from '@kqinfo/ui';
 
 ### 水平间距
 
+<img width="314" alt="image" src="https://github.com/user-attachments/assets/5127e3aa-f92f-429c-bd56-489cc5a5cdac" />
+
+
 ```tsx
 <Space size={16}>
   <View>元素1</View>
@@ -87,6 +90,9 @@ import { Space } from '@kqinfo/ui';
 ```
 
 ### 垂直间距
+
+<img width="316" alt="image" src="https://github.com/user-attachments/assets/55e1d758-b72c-4dfe-a512-c02b765dfbe2" />
+
 
 ```tsx
 <Space size={16} vertical>
@@ -155,6 +161,9 @@ import { Space } from '@kqinfo/ui';
 
 ### 基础用法
 
+<img width="265" alt="image" src="https://github.com/user-attachments/assets/f4e31935-b245-41c0-ad05-2ac20518a0cc" />
+
+
 ```
 import {BackgroundImg} from '@kqinfo/ui';
 export default () => {
@@ -162,7 +171,10 @@ return (
 <BackgroundImg
 img="https://example.com/bg.jpg"
 >
-  <View>内容</View>
+  <View>
+   <View>基础护理</View>
+   <View>肌肉注射雾化</View>
+  </View>
 </BackgroundImg>
 );
 }
@@ -222,6 +234,8 @@ className: {styles.customInner}
 基于 remax/wechat 的 Image 组件封装,增强了图片预览、占位图等功能。
 
 ##  使用示例
+<img width="100" alt="image" src="https://github.com/user-attachments/assets/5ccbfdcf-d639-4d03-8fd0-8c22ba592dde" />
+
 
 ```
 import {Image} from '@kqinfo/ui';
@@ -280,6 +294,9 @@ npm install jsbarcode
 
 ## 使用示例
 
+<img width="171" alt="image" src="https://github.com/user-attachments/assets/871ad7db-4eae-4f99-8642-6da67ec994fe" />
+
+
 ```
 import {BarCode} from '@kqinfo/ui';
 export default () => {
@@ -329,6 +346,8 @@ width: 1.5
 一个支持点击展示弹窗的二维码组件。
 
 ## 使用示例
+<img width="310" alt="image" src="https://github.com/user-attachments/assets/997a41af-395c-40e8-aea7-708412f55e10" />
+
 
 ```
 import { QrCode } from '@kqinfo/ui';
@@ -1247,3 +1266,318 @@ listRef.current.refreshList();
 1. 虚拟滚动模式下需要正确设置 renderItemHeight
 2. getList 返回的数据项需要包含唯一的 id 字段
 3. 建议合理使用 cacheKey 来缓存数据,提升用户体验
+
+# NoData 空状态
+
+用于显示暂无数据、加载失败等空状态。
+
+## 何时使用
+
+- 当列表、表格等内容为空时
+- 需要占位提示时
+- 加载失败需要提示时
+
+## 代码演示
+<img width="103" alt="image" src="https://github.com/user-attachments/assets/6d2f852f-1487-48c5-9c39-47993c80e2bb" />
+
+### 基础用法
+
+```
+import { NoData } from '@kqinfo/ui';
+export default () => {
+return <NoData />;
+};
+```
+
+### 自定义图片
+
+```
+import { NoData } from '@kqinfo/ui';
+export default () => {
+return <NoData src="your-custom-image.png" />;
+};
+```
+
+### 自定义渲染
+
+通过 ConfigProvider 可以完全自定义空状态的渲染内容：
+
+```
+import { ConfigProvider, NoData } from '@kqinfo/ui';
+export default () => {
+return (
+<ConfigProvider
+renderNoData={() => <div>自定义的空状态内容</div>}
+>
+<NoData />
+</ConfigProvider>
+);
+};
+```
+
+## API
+
+### Props
+
+| 参数      | 说明           | 类型   | 默认值                                                      |
+| --------- | -------------- | ------ | ----------------------------------------------------------- |
+| src       | 图片地址       | string | https://kq-static.oss-cn-beijing.aliyuncs.com/ui/noData.png |
+| className | 自定义样式类名 | string | -                                                           |
+
+此外，组件还支持所有 Image 组件的属性。
+
+### ConfigProvider
+
+可以通过 ConfigProvider 的 `renderNoData` 属性进行全局配置：
+
+| 参数         | 说明                   | 类型                  | 默认值 |
+| ------------ | ---------------------- | --------------------- | ------ |
+| renderNoData | 自定义渲染空状态的方法 | () => React.ReactNode | -      |
+
+## 注意事项
+
+1. 当使用自定义渲染时，如果 renderNoData 返回 undefined，将显示默认的空状态图片
+2. 组件默认居中显示
+3. 可以通过 className 和 style 属性自定义样式
+
+# NoticeBar 通知栏
+
+通知栏组件,用于展示重要的通知信息。支持自定义样式、图标和滚动动画效果。
+
+## 何时使用
+
+- 当需要展示系统通知、消息提醒时
+- 需要引起用户注意的重要信息展示
+- 营销信息或活动信息的温和提示
+
+## 代码示例
+<img width="312" alt="image" src="https://github.com/user-attachments/assets/6d017a1f-f0ce-42ef-9129-07e668cb5d19" />
+
+```
+import { NoticeBar } from '@kqinfo/ui';
+export default () => {
+return (
+<NoticeBar
+title="通知"
+background="#fefcec"
+color="#FF9D46"
+>
+这里是通知内容
+</NoticeBar>
+);
+};
+```
+
+## API
+
+| 参数       | 说明                    | 类型                  | 默认值                      |
+| ---------- | ----------------------- | --------------------- | --------------------------- |
+| className  | 自定义样式名            | `string`              | -                           |
+| style      | 行内样式                | `React.CSSProperties` | -                           |
+| background | 背景色                  | `string`              | `#fefcec`                   |
+| color      | 文字颜色                | `string`              | `#FF9D46`                   |
+| icon       | 设置图标,传null则不显示 | `React.ReactNode`     | `<Icon name="kq-notice" />` |
+| title      | 设置左侧标题            | `React.ReactNode`     | -                           |
+| children   | 消息内容                | `React.ReactNode`     | -                           |
+
+## 注意事项
+
+1. 通知内容过长时会自动开启滚动动画
+2. 可以通过传入 `null` 作为 icon 属性来隐藏默认图标
+3. title 和 children 支持传入自定义 React 节点
+4. 组件样式可以通过 className 和 style 属性进行自定义
+
+# Del 删除线组件
+
+一个用于给文本添加删除线效果的React组件。
+
+## 代码示例
+<img width="85" alt="image" src="https://github.com/user-attachments/assets/b5b742b4-15e9-4bf9-bf3b-2fadaccb2f97" />
+
+### 基础用法
+
+```
+mport { Del } from '@kqinfo/ui';
+export default () => (
+<Del>已删除的文本</Del>
+);
+```
+
+### 自定义样式
+
+```
+import { Del } from '@kqinfo/ui';
+export default () => (
+<Del color="red" style={{fontSize: '20px'}}>
+自定义样式的删除文本
+</Del>
+);
+```
+
+## Props
+
+| 参数      | 说明       | 类型                | 默认值  |
+| --------- | ---------- | ------------------- | ------- |
+| className | 自定义类名 | string              | -       |
+| children  | 删除内容   | React.ReactNode     | -       |
+| lineCls   | 删除线类名 | string              | -       |
+| color     | 删除线颜色 | string              | #999999 |
+| style     | 自定义样式 | React.CSSProperties | -       |
+
+## 使用场景
+
+- 显示商品原价
+- 标记已删除或失效的内容
+- 文本编辑中的删除效果
+
+## 注意事项
+
+1. 组件基于 @kqinfo/ui 的 Space 组件实现
+2. 可以通过 color 属性自定义删除线颜色
+3. 支持通过 style 和 className 进行样式自定义
+
+# Price 价格组件
+
+一个用于展示价格的 React 组件,支持自定义整数、小数部分的样式,以及价格符号的展示。
+
+## 引入
+
+```
+import { Price } from '@kqinfo/ui';
+```
+
+## 代码演示
+<img width="183" alt="image" src="https://github.com/user-attachments/assets/a36f435a-956e-46da-b425-cb89339e14d9" />
+
+### 基础用法
+
+```
+import React from 'react';
+import { Price } from '@kqinfo/ui';
+export default () => (
+<>
+<Price price={1234} /> {/ 展示: ¥12.34 /}
+<Price price={1234} len={1} /> {/ 展示: ¥12.3 /}
+</>
+);
+```
+
+### 自定义样式
+
+```
+import React from 'react';
+import { Price } from '@kqinfo/ui';
+export default () => (
+<Price
+price={1234}
+bigPrefix // 放大价格符号
+bigDecimal // 放大小数部分
+bigScale={2} // 设置放大比例
+/>
+);
+
+```
+
+## API
+
+| 参数       | 说明             | 类型      | 默认值 |
+| ---------- | ---------------- | --------- | ------ |
+| price      | 金额,单位:分     | `number`  | -      |
+| len        | 小数位长度       | `number`  | 2      |
+| bold       | 是否使用粗体     | `boolean` | false  |
+| bigPrefix  | 是否放大价格符号 | `boolean` | false  |
+| bigDecimal | 是否放大小数部分 | `boolean` | false  |
+| bigScale   | 字体放大比例     | `number`  | 1.53   |
+| bigCls     | 大字体类名       | `string`  | -      |
+| integerCls | 整数部分类名     | `string`  | -      |
+| decimalCls | 小数部分类名     | `string`  | -      |
+
+## 特性
+
+- 自动处理金额单位转换(分→元)
+- 支持自定义小数位数
+- 可分别控制价格符号、整数、小数部分的样式
+- 灵活的字体大小控制
+- 支持自定义 CSS 类名
+
+## 注意事项
+
+1. price 参数接收的金额单位为分
+2. 当传入的 price 为 0 或无效值时,将显示 "¥0"
+3. bigScale 参数控制放大部分的字体大小比例,如设置为 2 则字体将放大为原来的 2 倍
+
+## 常见问题
+
+Q: 如何只显示整数部分?  
+A: 设置 `len={0}` 即可隐藏小数部分
+
+Q: 如何自定义价格符号的样式?  
+A: 可以通过 `bigPrefix` 和 `bigCls` 组合使用来自定义价格符号样式
+
+# DownTime 倒计时组件
+
+一个简单的倒计时组件,用于显示距离目标时间的剩余时间。
+
+## 使用示例
+<img width="122" alt="image" src="https://github.com/user-attachments/assets/157a0a7d-289a-4a32-85f0-71a47165f55d" />
+
+```
+import DownTime from '@kqinfo/ui';
+// 基础用法
+export default () => {
+return (
+<DownTime
+targetDate="2024-12-31 23:59:59"
+format={({d, h, m, s}) => ${d}天${h}时${m}分${s}秒}
+/>
+);
+}
+// 自动停止
+export default () => {
+return (
+<DownTime
+targetDate="2024-12-31 23:59:59"
+format={({d, h, m, s, isEnd}) => {
+if(isEnd) return '活动已结束';
+return ${d}天${h}时${m}分${s}秒;
+}}
+autoStop
+/>
+);
+}
+```
+
+## API
+
+### Props
+
+| 参数       | 说明                       | 类型                         | 默认值 |
+| ---------- | -------------------------- | ---------------------------- | ------ |
+| targetDate | 目标日期                   | string                       | -      |
+| format     | 自定义格式化函数           | (data: FormatData) => string | -      |
+| style      | 自定义样式                 | React.CSSProperties          | -      |
+| className  | 自定义类名                 | string                       | -      |
+| autoStop   | 是否在倒计时结束后自动停止 | boolean                      | false  |
+
+### FormatData
+
+format 函数的参数类型:
+
+```
+interface FormatData {
+d: string; // 天数
+h: string; // 小时
+m: string; // 分钟
+s: string; // 秒
+diff: number; // 与目标时间差(秒)
+isEnd: boolean; // 是否结束
+}
+```
+
+## 注意事项
+
+1. targetDate 需要是合法的日期字符串格式
+2. format 函数必须返回字符串类型
+3. 组件会在unmount时自动清理定时器
+4. 当autoStop为true时,倒计时结束后会自动停止更新
+
