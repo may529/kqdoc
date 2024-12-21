@@ -2413,3 +2413,390 @@ menuMode="singleCol"
 2. 建议根据实际场景选择合适的展示模式
 3. 可以通过样式相关的 Props 进行样式自定义
 4. 适老模式会增大字号和间距
+
+# Swiper 轮播图组件
+
+基于 Swiper 封装的 React 轮播图组件，支持自动播放、分页指示器等特性。
+
+## 基础用法
+
+```
+import Swiper from '@kqinfo/ui';
+export default () => {
+const items = [
+{
+node: <div>Slide 1</div>
+},
+{
+node: <div>Slide 2</div>
+},
+{
+node: <div>Slide 3</div>
+}
+];
+return (
+<Swiper
+items={items}
+autoplay
+indicatorDots
+/>
+);
+}
+```
+
+## Props
+
+| 参数                 | 说明                                 | 类型                                       | 默认值  |
+| -------------------- | ------------------------------------ | ------------------------------------------ | ------- |
+| items                | 轮播项数组，每项包含 node(React节点) | `Array<{node: ReactNode}>`                 | -       |
+| indicatorDots        | 是否显示指示器，可选 `true`/`'line'` | `boolean \| 'line'`                        | `false` |
+| lineDotsCls          | 线状指示器的自定义类名               | `string`                                   | -       |
+| autoplay             | 是否自动播放                         | `boolean`                                  | `false` |
+| interval             | 自动播放间隔时间(ms)                 | `number`                                   | `3000`  |
+| current              | 当前页面的 index                     | `number`                                   | -       |
+| displayMultipleItems | 同时显示的滑块数量                   | `number`                                   | `1`     |
+| circular             | 是否循环播放                         | `boolean`                                  | `false` |
+| vertical             | 滑动方向是否为纵向                   | `boolean`                                  | `false` |
+| className            | 容器类名                             | `string`                                   | -       |
+| style                | 容器样式                             | `CSSProperties`                            | -       |
+| onChange             | 轮播切换时触发                       | `(e: {detail: {current: number}}) => void` | -       |
+
+## 特性
+
+- 支持自动播放
+- 支持循环播放
+- 支持垂直/水平方向滑动
+- 支持显示多个滑块
+- 支持点状/线状两种指示器样式
+- 支持受控和非受控模式
+
+## 注意事项
+
+1. 使用 `current` 属性时组件为受控模式，需要配合 `onChange` 使用
+2. `indicatorDots` 设置为 `'line'` 时显示线状指示器，可通过 `lineDotsCls` 自定义样式
+3. 设置 `displayMultipleItems` 大于 1 时，可同时显示多个滑块
+
+# SwipeAction 滑动操作
+
+一个用于实现滑动显示操作按钮的组件。常用于列表项的快捷操作。
+
+## 介绍
+
+SwipeAction 组件基于 @kqinfo/ui 的 Swiper 组件封装,提供了便捷的滑动操作功能。通过左右滑动可以显示/隐藏操作区域。
+
+<img width="308" alt="image" src="https://github.com/user-attachments/assets/662cd2dc-2c6b-4340-93be-4a153c4ef99a" />
+
+
+## 基础用法
+
+```
+import { SwipeAction } from '@kqinfo/ui';
+export default () => {
+return (
+<SwipeAction
+action={
+<div style={{ background: 'red', height: '100%', padding: '0 20px' }}>
+删除
+</div>
+}
+>
+<div style={{ background: '#fff', padding: 20 }}>
+列表项内容
+</div>
+</SwipeAction>
+);
+};
+```
+
+## API
+
+### Props
+
+| 参数      | 说明           | 类型                | 默认值 |
+| --------- | -------------- | ------------------- | ------ |
+| children  | 主内容区域     | React.ReactNode     | -      |
+| action    | 操作区域内容   | React.ReactNode     | -      |
+| className | 容器自定义类名 | string              | -      |
+| style     | 容器自定义样式 | React.CSSProperties | -      |
+
+## 特点
+
+- 支持自定义主内容和操作区域
+- 滑动流畅,体验良好
+- 点击操作区域后自动关闭
+- 可自定义样式
+
+## 注意事项
+
+1. action 区域建议设置背景色和高度以便于显示
+2. 主内容区域建议设置背景色,避免透明
+
+# 表单与输入组件
+
+# Form 表单组件
+
+基于rc-field-form封装的表单组件,提供了验证、布局、缓存等增强功能。
+
+## 基础用法
+
+```
+import Form from '@kqinfo/ui';
+export default () => {
+const [form] = Form.useForm();
+return (
+<Form
+form={form}
+onFinish={(values) => {
+console.log(values);
+}}
+>
+<Form.Item
+name="username"
+label="用户名"
+rules={[{ required: true }]}
+>
+<Input />
+</Form.Item>
+<Form.Item
+name="password"
+label="密码"
+rules={[{ required: true }]}
+>
+<Input type="password" />
+</Form.Item>
+<Button onTap={() => form.submit()}>
+提交
+</Button>
+</Form>
+);
+}
+```
+
+## Props
+
+### Form Props
+
+| 参数           | 说明                                   | 类型                                       | 默认值             |
+| -------------- | -------------------------------------- | ------------------------------------------ | ------------------ |
+| form           | 经 Form.useForm() 创建的 form 控制实例 | FormInstance                               | -                  |
+| initialValues  | 表单默认值                             | object                                     | -                  |
+| onFinish       | 提交表单且数据验证成功后回调事件       | function(values)                           | -                  |
+| onFinishFailed | 提交表单且数据验证失败后回调事件       | function({values, errorFields, outOfDate}) | 默认展示第一个错误 |
+| card           | 是否启用卡片模式                       | boolean                                    | true               |
+| cell           | 是否启用单元格模式                     | boolean                                    | false              |
+| elderly        | 适老模式,开启后尺寸会变大              | boolean                                    | false              |
+| autoCacheKey   | 设置后会自动缓存表单数据的key          | string                                     | -                  |
+| autoClearCache | 提交后自动清空缓存                     | boolean                                    | true               |
+
+### FormItem Props
+
+| 参数       | 说明         | 类型          | 默认值 |
+| ---------- | ------------ | ------------- | ------ |
+| name       | 字段名       | string        | -      |
+| label      | 标签名       | ReactNode     | -      |
+| rules      | 校验规则     | Rule[]        | -      |
+| readOnly   | 只读模式     | boolean       | false  |
+| required   | 是否必填     | boolean       | false  |
+| vertical   | 是否垂直布局 | boolean       | false  |
+| labelWidth | label宽度    | number/string | -      |
+
+## 特性说明
+
+### 表单验证
+
+支持的验证规则类型:
+
+```
+interface Rule {
+type?: 'string' | 'number' | 'boolean' | 'array' | 'object' | 'phone' | 'idCard' | 'password';
+required?: boolean;
+message?: string;
+min?: number;
+max?: number;
+pattern?: RegExp;
+// ...
+}
+```
+
+### 自动缓存
+
+设置 autoCacheKey 后会自动缓存表单数据:
+
+```
+<Form autoCacheKey="form-cache">
+{/ 表单项 /}
+</Form>
+```
+
+### 布局模式
+
+- card模式: 带阴影的卡片式布局
+- cell模式: 类似单元格的紧凑布局
+- vertical模式: label在上方的垂直布局
+
+## API
+
+### Form 方法
+
+| 名称                | 说明           |
+| ------------------- | -------------- |
+| Form.useForm()      | 创建Form实例   |
+| form.getFieldValue  | 获取单个字段值 |
+| form.getFieldsValue | 获取一组字段值 |
+| form.setFieldsValue | 设置一组字段值 |
+| form.resetFields    | 重置表单       |
+| form.submit         | 提交表单       |
+| form.validate       | 验证表单       |
+
+### Form.List
+
+用于渲染表单数组字段:
+
+```
+<Form.List name="users">
+{fields => (
+<>
+{fields.map(field => (
+<Form.Item {...field}>
+<Input />
+</Form.Item>
+))}
+</>
+)}
+</Form.List>
+
+```
+
+# FormItem 表单项组件
+
+FormItem 是一个灵活的表单项组件,用于构建表单中的单个输入项,支持标签、验证、错误提示等特性。
+
+## 基础用法
+
+```
+import { Form, FormItem } from '@kqinfo/ui';
+export default () => {
+return (
+<Form>
+<FormItem
+label="用户名"
+name="username"
+rules={[{ required: true }]}
+>
+<Input placeholder="请输入用户名" />
+</FormItem>
+</Form>
+);
+};
+```
+
+## API
+
+### Props
+
+| 参数          | 说明         | 类型               | 默认值  |
+| ------------- | ------------ | ------------------ | ------- |
+| label         | 标签文本     | `ReactNode`        | -       |
+| name          | 字段名       | `string`           | -       |
+| rules         | 校验规则     | `Rule[]`           | -       |
+| required      | 是否必填     | `boolean`          | `false` |
+| readOnly      | 是否只读     | `boolean`          | `false` |
+| vertical      | 是否垂直布局 | `boolean`          | `false` |
+| colon         | 是否显示冒号 | `boolean`          | `true`  |
+| labelWidth    | 标签宽度     | `string \| number` | -       |
+| labelStyle    | 标签样式     | `CSSProperties`    | -       |
+| childrenStyle | 内容样式     | `CSSProperties`    | -       |
+| className     | 自定义类名   | `string`           | -       |
+| style         | 自定义样式   | `CSSProperties`    | -       |
+
+### 校验规则
+
+支持的规则类型:
+
+```
+{
+required: boolean,
+message: string,
+type: string,
+validator: (rule, value) => Promise
+}
+```
+
+## 常见用法
+
+### 必填验证
+
+```
+<FormItem
+label="用户名"
+name="username"
+rules={[{ required: true, message: '请输入用户名' }]}
+>
+<Input />
+</FormItem>
+```
+
+### 自定义验证
+
+```
+<FormItem
+label="密码"
+name="password"
+rules={[
+{
+validator: async (rule, value) => {
+if (!value || value.length < 6) {
+throw new Error('密码长度不能小于6位');
+}
+}
+}
+]}
+>
+<Input type="password" />
+</FormItem>
+```
+
+### 只读模式
+
+```
+<FormItem
+label="用户名"
+name="username"
+readOnly
+renderReadOnlyValue={(value) => ${value}}
+>
+<Input />
+</FormItem>
+```
+
+### 垂直布局
+
+```
+<FormItem
+label="描述"
+name="desc"
+vertical
+>
+<TextArea />
+</FormItem>
+```
+
+### 自定义样式
+
+```
+<FormItem
+label="用户名"
+labelStyle={{ color: '#666' }}
+childrenStyle={{ marginLeft: 20 }}
+style={{ marginBottom: 24 }}
+>
+<Input />
+</FormItem>
+```
+
+## 注意事项
+
+1. FormItem 需要配合 Form 组件使用
+2. name 属性用于表单数据收集和校验
+3. 自定义校验规则时,validator 函数需要返回 Promise
+4. 只读模式下可通过 renderReadOnlyValue 自定义显示内容
