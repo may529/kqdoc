@@ -153,7 +153,7 @@ import { Space } from '@kqinfo/ui';
 3. 组件会自动过滤掉 undefined、null、false、''等无效的子元素
 4. 支持 Fragment 语法
 
-# BackgroundImage 背景图组件
+# BackgroundImg 背景图组件
 
 一个简单的背景图容器组件,支持图片预览、自定义内容等功能。
 
