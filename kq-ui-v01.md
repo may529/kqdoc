@@ -1851,8 +1851,8 @@ return <Table columns={columns} dataSource={data} />;
 | columns     | 表格列的配置               | `Column<T>[]`           | -                 |
 | loading     | 页面是否加载中             | `boolean`               | `false`           |
 | doubleColor | 双行的高亮颜色             | `string`                | 主题色的0.1透明度 |
-| align       | 文字对齐方式               | `'center' \| 'between'` | -                 |
-| shadow      | 阴影配置,设置为false不显示 | `false \| ShadowProps`  | -                 |
+| align       | 文字对齐方式               | `'center' | 'between'` | -                 |
+| shadow      | 阴影配置,设置为false不显示 | `false | ShadowProps`  | -                 |
 | onRowTap    | 行点击事件                 | `(data: T) => void`     | -                 |
 | headerCls   | 表头类名                   | `string`                | -                 |
 | headerStyle | 表头样式                   | `CSSProperties`         | -                 |
@@ -2024,7 +2024,7 @@ console.log('selected:', value, item);
 | className     | 外层容器类名     | `string`                                                 | -           |
 | itemCls       | 选项样式类名     | `string`                                                 | -           |
 | itemSelectCls | 选中项样式类名   | `string`                                                 | -           |
-| maxHeight     | 下拉面板最大高度 | `string \| number`                                       | `'50vh'`    |
+| maxHeight     | 下拉面板最大高度 | `string | number`                                       | `'50vh'`    |
 | value         | 当前选中值       | `any`                                                    | -           |
 | title         | 显示的标题       | `string`                                                 | -           |
 | options       | 选项数据         | `Array<{text: string, value: any}>`                      | -           |
@@ -2033,7 +2033,7 @@ console.log('selected:', value, item);
 | arrowsCls     | 箭头图标类名     | `string`                                                 | -           |
 | arrowsColor   | 箭头图标颜色     | `string`                                                 | `'#bbb'`    |
 | arrowsSize    | 箭头图标大小     | `number`                                                 | `28rpx`     |
-| onTap         | 自定义点击事件   | `() => boolean \| void`                                  | -           |
+| onTap         | 自定义点击事件   | `() => boolean | void`                                  | -           |
 | titleCls      | 标题类名         | `string`                                                 | -           |
 | dowCls        | 下拉面板类名     | `string`                                                 | -           |
 
@@ -2106,3 +2106,310 @@ return false;
 
 可通过对应的 className props 覆盖这些样式。
 
+# Tab 标签页组件
+
+Tab 组件用于在不同视图之间切换。支持卡片式和普通两种外观,可以进行受控和非受控的使用。
+
+<img width="317" alt="image" src="https://github.com/user-attachments/assets/a5f81909-74e9-465d-8c21-06e5fbf8c2ab" />
+
+
+## 代码示例
+
+### 基础用法
+
+```
+import { Tab } from '@kqinfo/ui';
+export default () => {
+const tabs = [
+{ content: '标签1', index: 0 },
+{ content: '标签2', index: 1 }
+];
+return (
+<Tab
+tabs={tabs}
+onChange={(index) => console.log('切换到:', index)}
+/>
+);
+};
+```
+
+### 卡片式标签页
+
+```
+import { Tab } from '@kqinfo/ui';
+export default () => {
+const tabs = [
+{ content: '标签1', index: 0 },
+{ content: '标签2', index: 1 }
+];
+return (
+<Tab
+type="card"
+tabs={tabs}
+onChange={(index) => console.log('切换到:', index)}
+/>
+);
+};
+```
+
+### 受控用法
+
+```
+import { Tab } from '@kqinfo/ui';
+import { useState } from 'react';
+export default () => {
+const [active, setActive] = useState(0);
+const tabs = [
+{ content: '标签1', index: 0 },
+{ content: '标签2', index: 1 }
+];
+return (
+<Tab
+tabs={tabs}
+current={active}
+onChange={setActive}
+control
+/>
+);
+};
+```
+
+## API
+
+### Props
+
+| 参数          | 说明                 | 类型                                    | 默认值      |
+| ------------- | -------------------- | --------------------------------------- | ----------- |
+| tabs          | 标签页配置           | `Array<{content: ReactNode, index: T}>` | -           |
+| current       | 当前激活的标签页索引 | `T`                                     | -           |
+| onChange      | 切换标签页的回调函数 | `(index: T) => void`                    | -           |
+| control       | 是否为受控组件       | `boolean`                               | `false`     |
+| type          | 标签页样式类型       | `'default' | 'card'`                   | `'default'` |
+| className     | 容器类名             | `string`                                | -           |
+| containerCls  | 内容区域类名         | `string`                                | -           |
+| itemCls       | 标签项类名           | `string`                                | -           |
+| activeItemCls | 激活状态的标签项类名 | `string`                                | -           |
+| style         | 容器样式             | `CSSProperties`                         | -           |
+
+### 特性说明
+
+1. 支持泛型类型 `T`,可以自定义 tab 的 index 类型
+2. 当只有两个标签页时,会自动添加一个带动画效果的分隔线
+3. 可以通过 `control` 属性切换受控/非受控模式
+4. 提供了 card 类型的替代样式
+
+### 注意事项
+
+1. 在受控模式下,需要同时提供 `current` 和 `onChange` 属性
+2. `tabs` 数组中的 `index` 值需要保持唯一
+3. 样式定制可以通过 `className`、`itemCls` 等属性实现
+
+# TabBar 标签栏
+
+移动端底部导航标签栏组件。
+
+<img width="316" alt="image" src="https://github.com/user-attachments/assets/58f1fa59-b881-47f5-bc8e-3ebe257fb539" />
+
+
+## 介绍
+
+TabBar 是一个用于移动端的底部导航组件,支持图标和文字的显示,可以方便地控制当前激活项,并且支持安全区域。
+
+## 基础用法
+
+```
+import { TabBar } from '@kqinfo/ui';
+import { Home, User } from '@/icons';
+export default () => {
+return (
+<TabBar
+items={[
+{
+title: '首页',
+icon: (active) => <Home color={active ? '#1890ff' : '#999'} />,
+index: 0
+},
+{
+title: '我的',
+icon: (active) => <User color={active ? '#1890ff' : '#999'} />,
+index: 1
+}
+]}
+onChange={(current) => {
+console.log('当前选中:', current);
+}}
+/>
+);
+}
+```
+
+## API
+
+### TabBar Props
+
+| 参数        | 说明           | 类型                                | 默认值       |
+| ----------- | -------------- | ----------------------------------- | ------------ |
+| className   | 自定义样式名   | string                              | -            |
+| style       | 行内样式       | CSSProperties                       | -            |
+| color       | 文字颜色       | string                              | #bebebe      |
+| activeColor | 选中后文字颜色 | string                              | brandPrimary |
+| current     | 当前位置索引   | number | string                    | -            |
+| items       | tabBar数据     | TabBarItemProps[]                   | []           |
+| onChange    | 切换时触发     | (current: number | string) => void | -            |
+| itemCls     | 子项类名       | string                              | -            |
+
+### TabBarItemProps
+
+| 参数  | 说明                    | 类型                                          | 默认值 |
+| ----- | ----------------------- | --------------------------------------------- | ------ |
+| title | tab名称                 | ReactNode                                     | -      |
+| icon  | 设置图标,传null则不显示 | ReactNode | ((active: boolean) => ReactNode) | -      |
+| index | 路由索引                | number | string                              | -      |
+| hide  | 是否隐藏                | boolean                                       | false  |
+
+## 注意事项
+
+1. icon 支持两种传入方式:
+   - ReactNode: 直接传入图标组件
+   - Function: 传入函数,可根据激活状态返回不同样式的图标
+
+2. 组件会自动处理安全区域,确保在全面屏设备上有正确的底部间距
+
+3. 可以通过 hide 属性动态控制某一项是否显示
+
+# Menu 菜单组件
+
+一个功能丰富的多级菜单组件,支持多种展示模式和自定义样式。
+
+## 功能特点
+
+- 支持多级菜单结构
+- 提供三种展示模式:children(默认)、list、singleCol 
+- 支持二级菜单的折叠和子菜单模式
+- 丰富的样式自定义
+- 支持适老化模式
+
+## 基础用法
+
+<img width="312" alt="image" src="https://github.com/user-attachments/assets/dd27beb8-9be6-4e5a-be1f-ee99053489fc" />
+
+
+```
+import { Menu } from '@kqinfo/ui'
+const data = [
+{
+id: '1',
+name: '一级菜单',
+children: [
+{
+id: '1-1',
+name: '二级菜单',
+children: [
+{
+id: '1-1-1',
+name: '三级菜单'
+}
+]
+}
+]
+}
+]
+export default () => (
+<Menu
+data={data}
+onChange={(id, children) => {
+console.log('当前选中:', id)
+}}
+onSelect={item => {
+console.log('选中项:', item)
+}}
+/>
+)
+```
+
+## API
+
+### Props
+
+| 参数             | 说明                     | 类型                                     | 默认值       |
+| ---------------- | ------------------------ | ---------------------------------------- | ------------ |
+| data             | 菜单数据                 | `MenuItem[]`                             | -            |
+| menuMode         | 菜单模式                 | `'children' \| 'list' \| 'singleCol'`    | `'children'` |
+| childrenMenuMode | 二级菜单模式             | `'collapse' \| 'subMenu'`                | `'subMenu'`  |
+| current          | 当前选中的菜单id         | `string \| number`                       | 第一个可选项 |
+| elderly          | 适老模式                 | `boolean`                                | `false`      |
+| onChange         | 菜单切换事件             | `(id: ID, children: MenuItem[]) => void` | -            |
+| onSelect         | 选择菜单项事件           | `(item: MenuItem) => void`               | -            |
+| autoFlexChildren | 自动折叠右侧展开的子菜单 | `boolean`                                | `false`      |
+
+### MenuItem 数据结构
+
+```
+interface MenuItem {
+id: string | number; // 唯一标识
+name: React.ReactNode; // 菜单名称
+children?: MenuItem[]; // 子菜单
+}
+```
+
+### 样式相关Props
+
+| 参数                  | 说明                 | 类型     |
+| --------------------- | -------------------- | -------- |
+| className             | 组件容器类名         | `string` |
+| leftCls               | 左侧区域类名         | `string` |
+| leftItemCls           | 左侧菜单项类名       | `string` |
+| leftActiveCls         | 左侧选中项类名       | `string` |
+| leftChildrenActiveCls | 左侧子菜单选中项类名 | `string` |
+| rightCls              | 右侧区域类名         | `string` |
+| rightItemCls          | 右侧菜单项类名       | `string` |
+| rightActiveCls        | 右侧选中项类名       | `string` |
+| rightItemChildrenCls  | 右侧子菜单类名       | `string` |
+| listCls               | list模式容器类名     | `string` |
+| listItemCls           | list模式菜单项类名   | `string` |
+
+## 不同模式示例
+
+### children 模式 (默认)
+<img width="310" alt="image" src="https://github.com/user-attachments/assets/2aa45880-f92c-4326-a3c6-9bbc6bc5a206" />
+
+左右两栏布局,支持多级菜单。
+
+```
+<Menu
+data={data}
+menuMode="children"
+childrenMenuMode="subMenu"
+/>
+```
+
+### list 模式
+
+单列展示所有菜单项。
+<img width="310" alt="image" src="https://github.com/user-attachments/assets/a8b4d55d-5219-4543-aff6-3274c05e7190" />
+
+```
+<Menu
+data={data}
+menuMode="list"
+/>
+```
+
+### singleCol 模式 
+
+单列可折叠菜单。
+<img width="313" alt="image" src="https://github.com/user-attachments/assets/fcfe94bf-2133-442e-bf40-eb3f8b299286" />
+
+```
+<Menu
+data={data}
+menuMode="singleCol"
+/>
+```
+
+## 注意事项
+
+1. data 数据中的 id 必须唯一
+2. 建议根据实际场景选择合适的展示模式
+3. 可以通过样式相关的 Props 进行样式自定义
+4. 适老模式会增大字号和间距
