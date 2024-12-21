@@ -1789,3 +1789,320 @@ style={{ margin: '20px 0' }}
 - 点击 << 向前跳转5页
 - 点击 >> 向后跳转5页
 - 跳转不会超出总页数范围
+
+# Table 表格
+
+用于展示多行多列数据的表格组件。
+
+## 引入
+
+```
+import { Table } from '@kqinfo/ui';
+```
+
+## 基础用法
+
+```
+import React from 'react';
+import { Table } from '@kqinfo/ui';
+interface DataType {
+name: string;
+age: number;
+address: string;
+}
+const columns = [
+{
+title: '姓名',
+dataIndex: 'name',
+},
+{
+title: '年龄',
+dataIndex: 'age',
+},
+{
+title: '地址',
+dataIndex: 'address',
+},
+];
+const data: DataType[] = [
+{
+name: '张三',
+age: 18,
+address: '北京',
+},
+{
+name: '李四',
+age: 20,
+address: '上海',
+},
+];
+export default () => {
+return <Table columns={columns} dataSource={data} />;
+};
+```
+
+## API
+
+### Props
+
+| 参数        | 说明                       | 类型                    | 默认值            |
+| ----------- | -------------------------- | ----------------------- | ----------------- |
+| dataSource  | 表格数据源                 | `T[]`                   | -                 |
+| columns     | 表格列的配置               | `Column<T>[]`           | -                 |
+| loading     | 页面是否加载中             | `boolean`               | `false`           |
+| doubleColor | 双行的高亮颜色             | `string`                | 主题色的0.1透明度 |
+| align       | 文字对齐方式               | `'center' \| 'between'` | -                 |
+| shadow      | 阴影配置,设置为false不显示 | `false \| ShadowProps`  | -                 |
+| onRowTap    | 行点击事件                 | `(data: T) => void`     | -                 |
+| headerCls   | 表头类名                   | `string`                | -                 |
+| headerStyle | 表头样式                   | `CSSProperties`         | -                 |
+| bodyCls     | 表格主体类名               | `string`                | -                 |
+| bodyStyle   | 表格主体样式               | `CSSProperties`         | -                 |
+| rowCls      | 行类名                     | `string`                | -                 |
+| rowStyle    | 行样式                     | `CSSProperties`         | -                 |
+| itemCls     | 单元格类名                 | `string`                | -                 |
+| itemStyle   | 单元格样式                 | `CSSProperties`         | -                 |
+| noDataCls   | 空数据组件类名             | `string`                | -                 |
+| noDataStyle | 空数据组件样式             | `CSSProperties`         | -                 |
+
+### Column
+
+| 参数      | 说明                       | 类型                                  | 默认值 |
+| --------- | -------------------------- | ------------------------------------- | ------ |
+| title     | 列头显示文字               | `ReactNode`                           | -      |
+| dataIndex | 列数据在数据项中对应的路径 | `keyof T`                             | -      |
+| width     | 列宽度                     | `number`                              | -      |
+| render    | 自定义渲染函数             | `(value, record, index) => ReactNode` | -      |
+
+## 代码演示
+<img width="314" alt="image" src="https://github.com/user-attachments/assets/281c9168-0836-4ace-adef-ea5797dcb1a6" />
+
+### 自定义渲染
+
+```
+const columns = [
+{
+title: '姓名',
+dataIndex: 'name',
+render: (name) => <Text style={{ color: 'red' }}>{name}</Text>
+}
+];
+```
+
+### 设置列宽
+
+```
+const columns = [
+{
+title: '姓名',
+dataIndex: 'name',
+width: 200
+}
+];
+```
+
+### 开启加载状态
+
+```
+<Table loading columns={columns} dataSource={data} />
+```
+
+### 双行高亮
+
+```
+<Table doubleColor="#f5f5f5" columns={columns} dataSource={data} />
+```
+
+### 行点击事件
+
+```
+<Table
+columns={columns}
+dataSource={data}
+onRowTap={(record) => {
+console.log('点击行:', record);
+}}
+/>
+```
+
+# DropDownMenu 下拉菜单
+
+可展开和收起的下拉菜单组件。
+
+## 介绍
+
+DropDownMenu 是一个可复用的下拉菜单组件,支持以下特性:
+
+- 支持展开/收起下拉选项
+- 可配置遮罩层
+- 支持手动控制显示状态
+- 支持自定义样式
+- 提供显示/隐藏状态回调
+
+## 基础用法
+
+```
+import { DropDownMenu } from '@kqinfo/ui';
+export default () => {
+return (
+<DropDownMenu>
+<DropDownMenu.Item>选项1</DropDownMenu.Item>
+<DropDownMenu.Item>选项2</DropDownMenu.Item>
+</DropDownMenu>
+);
+}
+```
+
+## API
+
+### Props
+
+| 参数            | 说明                   | 类型                                      | 默认值 |
+| --------------- | ---------------------- | ----------------------------------------- | ------ |
+| className       | 外层样式类名           | string                                    | -      |
+| showModal       | 是否显示遮罩层         | boolean                                   | true   |
+| children        | 子元素                 | React.ReactNode                           | -      |
+| onOpsVisible    | 显示/隐藏回调函数      | (visible: boolean, index: number) => void | -      |
+| opsVisibleIndex | 手动控制显示的选项索引 | number                                    | -1     |
+| style           | 内联样式               | React.CSSProperties                       | -      |
+| topHeight       | 定位顶部高度           | number                                    | 100    |
+
+### onOpsVisible 回调参数
+
+| 参数    | 说明               | 类型    |
+| ------- | ------------------ | ------- |
+| visible | 是否显示           | boolean |
+| index   | 当前操作的选项索引 | number  |
+
+## 注意事项
+
+1. 组件需要配合 DropDownMenu.Item 一起使用
+
+2. topHeight 的单位为 rpx
+
+3. 设置 opsVisibleIndex 可以手动控制显示的选项
+
+4. showModal 设为 false 时将不显示遮罩层
+
+   
+
+# DropDownMenuItem 下拉菜单项
+
+一个可定制的下拉菜单项组件,支持选项列表、自定义样式、状态控制等功能。
+
+<img width="321" alt="image" src="https://github.com/user-attachments/assets/7b541dfe-fadd-4035-b3bc-41b5b26cf911" />
+
+
+## 基础用法
+
+```
+import { DropDownMenuItem } from '@kqinfo/ui';
+export default () => {
+const options = [
+{ text: '选项1', value: 1 },
+{ text: '选项2', value: 2 }
+];
+return (
+<DropDownMenuItem
+title="请选择"
+options={options}
+value={1}
+onChange={(value, item) => {
+console.log('selected:', value, item);
+}}
+/>
+);
+}
+```
+
+## API
+
+### Props
+
+| 参数          | 说明             | 类型                                                     | 默认值      |
+| ------------- | ---------------- | -------------------------------------------------------- | ----------- |
+| className     | 外层容器类名     | `string`                                                 | -           |
+| itemCls       | 选项样式类名     | `string`                                                 | -           |
+| itemSelectCls | 选中项样式类名   | `string`                                                 | -           |
+| maxHeight     | 下拉面板最大高度 | `string \| number`                                       | `'50vh'`    |
+| value         | 当前选中值       | `any`                                                    | -           |
+| title         | 显示的标题       | `string`                                                 | -           |
+| options       | 选项数据         | `Array<{text: string, value: any}>`                      | -           |
+| onChange      | 选择回调         | `(value: any, item: {text: string, value: any}) => void` | -           |
+| icon          | 箭头图标名称     | `IconNames`                                              | `'kq-down'` |
+| arrowsCls     | 箭头图标类名     | `string`                                                 | -           |
+| arrowsColor   | 箭头图标颜色     | `string`                                                 | `'#bbb'`    |
+| arrowsSize    | 箭头图标大小     | `number`                                                 | `28rpx`     |
+| onTap         | 自定义点击事件   | `() => boolean \| void`                                  | -           |
+| titleCls      | 标题类名         | `string`                                                 | -           |
+| dowCls        | 下拉面板类名     | `string`                                                 | -           |
+
+### options 数据结构
+
+```
+interface Option {
+text: string; // 显示文本
+value: any; // 选项值
+}
+```
+
+## 进阶用法
+
+### 自定义样式
+
+```
+<DropDownMenuItem
+className="custom-dropdown"
+itemCls="custom-item"
+itemSelectCls="custom-selected"
+titleCls="custom-title"
+dowCls="custom-panel"
+arrowsCls="custom-arrow"
+// ...
+/>
+```
+
+### 自定义点击行为
+
+```
+<DropDownMenuItem
+onTap={() => {
+// 返回 false 可阻止展开/折叠
+if (someCondition) {
+return false;
+}
+// do something
+}}
+/>
+```
+
+### 自定义内容
+
+```
+<DropDownMenuItem title="自定义">
+<View className="custom-content">
+// 自定义下拉面板内容
+</View>
+</DropDownMenuItem>
+```
+
+## 注意事项
+
+1. 在移动端使用时会自动调整定位方式为 fixed
+2. maxHeight 默认为 50vh,可根据实际需求调整
+3. onTap 回调返回 false 时可阻止展开/折叠动作
+4. 支持通过 children 定制下拉面板的内容
+
+## 样式定制
+
+组件默认样式类名:
+
+- `.down` - 下拉面板
+- `.downSelect` - 选项
+- `.select` - 选中状态
+- `.downItem` - 触发器
+- `.flexCenter` - 居中布局
+- `.icon` - 箭头图标
+
+可通过对应的 className props 覆盖这些样式。
+
