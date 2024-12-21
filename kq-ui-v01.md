@@ -2531,6 +2531,74 @@ action={
 1. action 区域建议设置背景色和高度以便于显示
 2. 主内容区域建议设置背景色,避免透明
 
+# Indexes 索引列表
+
+类似通讯录的索引列表组件,支持按字母快速定位内容。
+<img width="321" alt="image" src="https://github.com/user-attachments/assets/080b8cd5-186d-4075-8d7b-937e06b1bb7d" />
+
+## 示例
+```
+import Indexes from '@kqinfo/ui';
+const Demo = () => {
+const list = [
+{ name: '阿里', id: 1 },
+{ name: '百度', id: 2 },
+{ name: 'Chrome', id: 3 }
+];
+return (
+<Indexes
+list={list}
+renderItem={(item) => ({
+// 返回需要索引的文字
+index: item.name,
+// 渲染的节点内容
+node: <div>{item.name}</div>
+})}
+/>
+);
+};
+```
+
+## API
+
+### Props
+
+| 参数 | 说明 | 类型 | 默认值 |
+| --- | --- | --- | --- |
+| list | 列表数据 | `D[]` | - |
+| renderItem | 渲染列表项,需要返回索引文字和渲染节点 | `(data: D) => { index: string; node: React.ReactNode }` | - |
+| className | 容器类名 | `string` | - |
+| indexCls | 索引标识的类名 | `string` | - |
+| slideItemCls | 侧边项类名 | `string` | - |
+| slideCls | 侧边栏类名 | `string` | - |
+| indexLineCls | 索引分割线类名 | `string` | - |
+| itemWrapCls | 单个索引列表盒子类名 | `string` | - |
+
+### 功能特性
+
+- 自动根据首字母生成拼音索引
+- 支持触摸和鼠标事件
+- 点击/触摸侧边栏可快速定位
+- 滚动时自动更新当前索引
+- 支持自定义样式
+
+### 注意事项
+
+1. renderItem 返回的 index 必须是字符串类型
+2. 非字母开头的索引会归类到 '#' 分组
+3. 索引会按字母顺序排序,# 永远在最后
+
+## 样式定制
+
+组件提供以下类名用于样式自定义:
+
+- indexCls: 索引标识样式
+- slideItemCls: 侧边栏项目样式  
+- slideCls: 侧边栏容器样式
+- indexLineCls: 索引分割线样式
+- itemWrapCls: 列表项容器样式
+
+
 # 表单与输入组件
 
 # Form 表单组件
@@ -2800,3 +2868,757 @@ style={{ marginBottom: 24 }}
 2. name 属性用于表单数据收集和校验
 3. 自定义校验规则时,validator 函数需要返回 Promise
 4. 只读模式下可通过 renderReadOnlyValue 自定义显示内容
+
+# InputNumber 数字输入框
+
+支持加减的数字输入框组件。
+
+## 介绍
+
+InputNumber 是一个用于数字输入的组件,支持通过点击按钮或者输入来改变数值。
+
+## 基础用法
+
+```
+import { InputNumber } from '@kqinfo/ui'
+export default () => {
+return (
+<InputNumber
+defaultValue={3}
+min={0}
+max={10}
+onChange={value => console.log(value)}
+/>
+)
+}
+```
+
+## API
+
+### Props
+
+| 参数              | 说明                     | 类型                                                         | 默认值                    |
+| ----------------- | ------------------------ | ------------------------------------------------------------ | ------------------------- |
+| value             | 当前值                   | `number`                                                     | -                         |
+| defaultValue      | 默认值                   | `number`                                                     | `0`                       |
+| min               | 最小值                   | `number`                                                     | `Number.MIN_SAFE_INTEGER` |
+| max               | 最大值                   | `number`                                                     | `Number.MAX_SAFE_INTEGER` |
+| step              | 每次改变步数，可以为小数 | `number`                                                     | `1`                       |
+| disabled          | 是否禁用                 | `boolean`                                                    | `false`                   |
+| unit              | 显示的单位               | `string`                                                     | -                         |
+| onChange          | 变化时回调函数           | `(value: number) => void`                                    | -                         |
+| formatValue       | 格式化显示值             | `(value: any) => string \| number`                           | -                         |
+| iconColor         | 图标的默认颜色           | `string`                                                     | 主题色                    |
+| disabledColor     | 禁用时图标的颜色         | `string`                                                     | `transparent`             |
+| className         | 外层样式类名             | `string`                                                     | -                         |
+| iconCls           | 图标样式类名             | `string`                                                     | -                         |
+| numberCls         | 数字样式类名             | `string`                                                     | -                         |
+| numberDisabledCls | 禁用时数字样式类名       | `string`                                                     | -                         |
+| addBtn            | 自定义增加按钮           | `(data: { disabled: boolean; handleAdd: () => void }) => ReactNode` | -                         |
+| subBtn            | 自定义减少按钮           | `(data: { disabled: boolean; handleSub: () => void }) => ReactNode` | -                         |
+
+## 代码示例
+
+### 基础用法
+
+```
+<InputNumber defaultValue={1} />
+```
+
+### 设置步长
+
+```
+<InputNumber step={0.1} />
+```
+
+### 设置范围
+
+```
+<InputNumber min={0} max={10} />
+```
+
+### 格式化展示
+
+```
+<InputNumber
+defaultValue={1000}
+formatValue={value => ${value}%}
+/>
+```
+
+### 自定义按钮
+
+```
+<InputNumber
+addBtn={({disabled, handleAdd}) => (
+<button onClick={handleAdd} disabled={disabled}>
+增加
+</button>
+)}
+subBtn={({disabled, handleSub}) => (
+<button onClick={handleSub} disabled={disabled}>
+减少
+</button>
+)}
+/>
+```
+
+### 设置单位
+
+```
+<InputNumber unit="kg" />
+```
+
+## 注意事项
+
+1. value 为受控属性,设置后需要通过 onChange 更新
+2. defaultValue 仅在初始化时生效
+3. step 支持小数,组件会自动处理精度问题
+4. 自定义按钮时需要自行处理禁用状态
+
+# InputLicenseKeyBoard 车牌号输入键盘
+
+## 介绍
+
+一个用于输入车牌号的自定义键盘组件。继承了原生input的部分属性,同时提供了专门的车牌号输入键盘。
+
+## 代码演示
+
+### 基础用法
+
+```
+import { InputLicenseKeyBoard } from '@kqinfo/ui';
+export default () => {
+return (
+<InputLicenseKeyBoard
+placeholder="请输入车牌号"
+onChange={val => console.log(val)}
+/>
+);
+}
+```
+
+### 受控组件
+
+```
+import { InputLicenseKeyBoard } from '@kqinfo/ui';
+import { useState } from 'react';
+export default () => {
+const [value, setValue] = useState('');
+return (
+<InputLicenseKeyBoard
+value={value}
+onChange={setValue}
+placeholder="请输入车牌号"
+/>
+);
+
+```
+
+### 带清除按钮
+
+```
+import { InputLicenseKeyBoard } from '@kqinfo/ui';
+export default () => {
+return (
+<InputLicenseKeyBoard
+clearable
+placeholder="请输入车牌号"
+onClear={() => console.log('cleared')}
+/>
+```
+
+## API
+
+### Props
+
+| 参数         | 说明               | 类型                      | 默认值  |
+| ------------ | ------------------ | ------------------------- | ------- |
+| value        | 输入值             | `string`                  | -       |
+| defaultValue | 默认值             | `string`                  | `''`    |
+| onChange     | 输入改变时触发     | `(value: string) => void` | -       |
+| placeholder  | 提示文本           | `string`                  | -       |
+| disabled     | 是否禁用           | `boolean`                 | `false` |
+| clearable    | 是否可清除         | `boolean`                 | `false` |
+| onClear      | 点击清除按钮时触发 | `() => void`              | -       |
+| title        | 键盘标题           | `string`                  | -       |
+| confirmText  | 确认按钮文字       | `string`                  | -       |
+| safeArea     | 是否开启安全区适配 | `boolean`                 | -       |
+
+### CSS 变量
+
+| 属性                | 说明         | 默认值 |
+| ------------------- | ------------ | ------ |
+| --font-size         | 字体大小     | -      |
+| --color             | 文字颜色     | -      |
+| --placeholder-color | 占位符颜色   | -      |
+| --text-align        | 文字对齐方式 | -      |
+
+### Ref
+
+| 方法名 | 说明       | 类型         |
+| ------ | ---------- | ------------ |
+| clear  | 清空输入值 | `() => void` |
+| focus  | 获取焦点   | `() => void` |
+| blur   | 失去焦点   | `() => void` |
+
+## 注意事项
+
+1. 组件默认是只读的,只能通过键盘输入
+2. 键盘显示时会自动关闭原生键盘
+3. 样式可以通过 CSS 变量进行自定义
+
+
+# ReInput 输入框组件
+
+基于 Remax/one 的 Input 组件封装的增强输入框组件。
+
+## 使用示例
+
+```
+import ReInput from '@kqinfo/ui';
+export default () => {
+return (
+<ReInput
+placeholder="请输入内容"
+onChange={value => console.log(value)}
+/>
+);
+}
+```
+
+## API
+
+### Props
+
+| 参数        | 说明                     | 类型                    | 默认值 |
+| ----------- | ------------------------ | ----------------------- | ------ |
+| className   | 自定义类名               | string                  | -      |
+| confirmType | 设置键盘右下角按钮的文字 | string                  | -      |
+| onChange    | 输入框内容变化时的回调   | (value: string) => void | -      |
+
+其他属性继承自 Remax/one 的 Input 组件。
+
+### Ref 转发
+
+组件支持通过 ref 访问内部的 input 元素。
+
+```
+import React, { useRef } from 'react';
+import ReInput from '@kqinfo/ui';
+export default () => {
+const inputRef = useRef(null);
+return <ReInput ref={inputRef} />;
+}
+```
+
+## 注意事项
+
+1. 组件使用 `forwardRef` 实现了 ref 转发功能
+2. 样式上默认添加了 `styles.web` 类名
+3. 通过 `useInput` hook 处理了输入相关的逻辑
+
+## 类型定义
+
+```
+export type Props = UseInputOption;
+```
+
+完整的类型定义请参考 `useInput.ts` 文件。
+
+#  ReTextarea
+
+一个基于 Remax 的 Textarea 组件封装，提供了更便捷的输入处理能力。
+
+## 介绍
+
+`ReTextarea` 是对 Remax 原生 Textarea 组件的封装，通过 `useInput` hook 提供了统一的输入处理能力。
+
+## 基础用法
+
+```
+import {Textarea} from '@kqinfo/ui';
+export default () => {
+const [value, setValue] = useState('');
+return (
+<Textarea
+value={value}
+onChange={setValue}
+placeholder="请输入内容"
+/>
+);
+}
+```
+
+## Props
+
+组件支持所有 UseInputOption 的属性:
+
+| 参数        | 说明                     | 类型                    | 默认值 |
+| ----------- | ------------------------ | ----------------------- | ------ |
+| value       | 输入框内容               | string                  | -      |
+| onChange    | 输入内容变化时的回调函数 | (value: string) => void | -      |
+| placeholder | 输入框占位文本           | string                  | -      |
+| disabled    | 是否禁用                 | boolean                 | false  |
+
+## 注意事项
+
+1. 组件使用了 `forwardRef`，可以通过 ref 访问到原生 Textarea 节点
+2. 所有 Remax Textarea 原生属性都可以直接传入使用
+
+## 示例
+
+### 使用 ref
+
+```
+import {Textarea} from '@kqinfo/ui';
+export default () => {
+const textareaRef = useRef(null);
+useEffect(() => {
+// 可以访问原生节点
+console.log(textareaRef.current);
+}, []);
+return (
+<Textarea
+ref={textareaRef}
+placeholder="带ref的文本域"
+/>
+);
+}
+```
+
+### 受控组件
+
+```
+import {Textarea} from '@kqinfo/ui';
+export default () => {
+const [value, setValue] = useState('');
+const handleChange = (val) => {
+setValue(val);
+};
+return (
+<Textarea
+value={value}
+onChange={handleChange}
+placeholder="受控的文本域"
+/>
+);
+
+```
+
+# Picker 选择器
+
+基于 antd-mobile 的选择器组件封装，支持级联选择、时间选择、日期选择等多种模式。
+
+## 使用示例
+
+### 基础选择器
+
+```
+import {Picker} from '@kqinfo/ui';
+const options = [
+{
+label: '选项1',
+value: '1',
+},
+{
+label: '选项2',
+value: '2',
+}
+];
+export default () => {
+const [value, setValue] = useState('1');
+return (
+<Picker
+mode="selector"
+data={options}
+value={value}
+onChange={setValue}
+>
+<div>点击选择</div>
+</Picker>
+);
+}
+```
+
+### 时间选择器
+
+```
+import {Picker} from '@kqinfo/ui';
+export default () => {
+const [time, setTime] = useState('09:30');
+return (
+<Picker
+mode="time"
+value={time}
+onChange={setTime}
+start="09:00"
+end="18:00"
+>
+<div>选择时间</div>
+</Picker>
+);
+}
+```
+
+### 日期选择器
+
+```
+import {Picker} from '@kqinfo/ui';
+export default () => {
+const [date, setDate] = useState('2024-03-20');
+return (
+<Picker
+mode="date"
+value={date}
+onChange={setDate}
+start="2024-01-01"
+end="2024-12-31"
+>
+<div>选择日期</div>
+</Picker>
+);
+}
+```
+
+## API
+
+### Props
+
+| 参数        | 说明                                                         | 类型                                     | 默认值     |
+| ----------- | ------------------------------------------------------------ | ---------------------------------------- | ---------- |
+| mode        | 选择器类型,可选值: `selector` | `time` | `date` | `datetime` | `month` | string                                   | `selector` |
+| value       | 选中值                                                       | string | number | (string | number)[] | -          |
+| onChange    | 选择后的回调                                                 | (value: any) => void                     | -          |
+| data        | 选项数据,仅在 mode="selector" 时有效                         | CascadePickerOption[]                    | -          |
+| cols        | 列数,仅在 mode="selector" 时有效                             | number                                   | -          |
+| start       | 起始值,时间格式为 HH:mm,日期格式为 YYYY-MM-DD                | string                                   | -          |
+| end         | 结束值,时间格式为 HH:mm,日期格式为 YYYY-MM-DD                | string                                   | -          |
+| disabled    | 是否禁用                                                     | boolean                                  | false      |
+| childrenCls | 触发元素的类名                                               | string                                   | -          |
+
+### CascadePickerOption
+
+```
+interface CascadePickerOption {
+label: string
+value: string | number
+children?: CascadePickerOption[]
+}
+```
+
+## 注意事项
+
+1. 时间选择器(mode="time")的 value/onChange 值格式为 "HH:mm"
+2. 日期选择器(mode="date")的 value/onChange 值格式为 "YYYY-MM-DD"
+3. 日期时间选择器(mode="datetime")的 value/onChange 值格式为 "YYYY-MM-DD HH:mm"
+4. 月份选择器(mode="month")的 value/onChange 值格式为 "YYYY-MM"
+5. 级联选择器(mode="selector")的 value 支持单值和数组两种格式,当 cols=1 时为单值
+
+# Jigsaw 拼图验证码组件
+
+基于 jigsaw-captcha-js 封装的 React 拼图验证码组件。
+
+## 功能特性
+
+- 支持自定义验证码图片
+- 可配置验证码尺寸
+- 提供验证成功/失败回调
+- 支持手动重置
+
+## 使用示例
+
+```
+import {Jigsaw} from '@kqinfo/ui';
+import { useRef } from 'react';
+export default () => {
+const jigsawRef = useRef();
+return (
+<Jigsaw
+ref={jigsawRef}
+imgs={['url1.jpg', 'url2.jpg']}
+width={620}
+height={310}
+onSuccess={() => {
+console.log('验证成功');
+}}
+onFail={() => {
+console.log('验证失败');
+}}
+/>
+);
+}
+```
+
+## API
+
+### Props
+
+| 参数      | 说明             | 类型       | 默认值 |
+| --------- | ---------------- | ---------- | ------ |
+| width     | 验证码宽度       | number     | 620    |
+| height    | 验证码高度       | number     | 310    |
+| imgs      | 验证码图片数组   | string[]   | -      |
+| onSuccess | 验证成功回调函数 | () => void | -      |
+| onFail    | 验证失败回调函数 | () => void | -      |
+| onRefresh | 刷新回调函数     | () => void | -      |
+
+### Ref Methods
+
+组件通过 ref 暴露以下方法:
+
+| 方法名 | 说明       | 类型       |
+| ------ | ---------- | ---------- |
+| reset  | 重置验证码 | () => void |
+
+## 注意事项
+
+1. 组件会在验证成功后自动重置,延迟时间为 1 秒
+2. 宽高单位采用 rpx,组件内部会自动转换为 px
+3. imgs 数组变化时会触发重新初始化
+
+# Switch 开关
+
+iOS风格的开关选择器组件。
+
+## 介绍
+
+Switch 是一个开关选择器组件,用于在打开/关闭状态间进行切换。
+
+## 引入
+
+```
+import { Switch } from '@kqinfo/ui';
+```
+
+## 代码演示
+
+### 基础用法
+
+```
+import { Switch } from '@kqinfo/ui';
+export default () => {
+return <Switch defaultValue={true} onChange={value => console.log(value)} />;
+};
+```
+
+### 受控模式
+
+```
+import { Switch } from '@kqinfo/ui';
+import { useState } from 'react';
+export default () => {
+const [checked, setChecked] = useState(false);
+return (
+<Switch
+value={checked}
+onChange={value => setChecked(value)}
+/>
+);
+};
+```
+
+### 自定义样式
+
+```
+import { Switch } from '@kqinfo/ui';
+export default () => {
+return (
+<>
+<Switch defaultValue={true} color="#f30" />
+<Switch defaultValue={true} fontSize={40} />
+</>
+);
+};
+```
+
+### 禁用状态
+
+```
+import { Switch } from '@kqinfo/ui';
+export default () => {
+return <Switch defaultValue={true} disabled />;
+};
+```
+
+## API
+
+| 参数         | 说明                          | 类型                       | 默认值  |
+| ------------ | ----------------------------- | -------------------------- | ------- |
+| value        | 是否选中,设置后变为受控组件   | `boolean`                  | -       |
+| defaultValue | 默认是否选中                  | `boolean`                  | -       |
+| disabled     | 是否禁用                      | `boolean`                  | `false` |
+| onChange     | 变化时的回调函数              | `(value: boolean) => void` | -       |
+| color        | 开关背景色                    | `string`                   | 主题色  |
+| fontSize     | 开关大小(高度为fontSize的2倍) | `number \| string`         | `25`    |
+| className    | 外层样式类名                  | `string`                   | -       |
+| circleCls    | 开关圆圈的样式类名            | `string`                   | -       |
+| style        | 外层样式对象                  | `CSSProperties`            | -       |
+
+## 常见问题
+
+### 如何修改开关的大小?
+
+可以通过 `fontSize` 属性统一控制开关的大小比例,组件高度为 fontSize 的 2 倍。
+
+### 如何修改开关的颜色?
+
+可以通过 `color` 属性修改开关打开时的背景色,默认使用主题色。
+
+
+# Checkbox 复选框
+
+复选框组件,支持单选和多选场景。
+
+## 引入
+
+```
+import { Checkbox } from '@kqinfo/ui';
+```
+
+## 代码演示
+
+### 基础用法
+
+```
+// 基础复选框
+<Checkbox>复选框</Checkbox>
+// 默认选中
+<Checkbox checked={true}>默认选中</Checkbox>
+// 禁用状态
+<Checkbox disabled>禁用状态</Checkbox>
+```
+
+### 按钮样式
+
+```
+// 按钮样式的复选框
+<Checkbox type="button">按钮样式</Checkbox>
+```
+
+### 自定义样式
+
+```
+// 自定义选中颜色
+<Checkbox iconColor="#ff0000">红色勾选</Checkbox>
+// 圆形复选框
+<Checkbox isRound>圆形复选框</Checkbox>
+```
+
+### 复选框组
+
+```
+<Checkbox.Group value={['1', '2']} onChange={(value) => console.log(value)}>
+<Checkbox value="1">选项1</Checkbox>
+<Checkbox value="2">选项2</Checkbox>
+<Checkbox value="3">选项3</Checkbox>
+</Checkbox.Group>
+```
+
+## API
+
+### Checkbox Props
+
+| 参数         | 说明                     | 类型                                                         | 默认值    |
+| ------------ | ------------------------ | ------------------------------------------------------------ | --------- |
+| checked      | 当前是否选中             | `boolean`                                                    | -         |
+| value        | 复选框的值               | `string \| number`                                           | -         |
+| children     | 复选框内容               | `React.ReactNode`                                            | -         |
+| onChange     | 选中状态改变时的回调函数 | `(checked: boolean, e?: any, value?: string \| number) => void` | -         |
+| iconColor    | 选中时的勾选图标颜色     | `string`                                                     | '#ffffff' |
+| isRound      | 是否为圆形               | `boolean`                                                    | false     |
+| type         | 复选框类型               | `'normal' \| 'button'`                                       | 'normal'  |
+| disabled     | 是否禁用                 | `boolean`                                                    | false     |
+| className    | 自定义类名               | `string`                                                     | -         |
+| activeCls    | 选中时的类名             | `string`                                                     | -         |
+| boxCls       | 复选框框的类名           | `string`                                                     | -         |
+| boxActiveCls | 复选框选中时的类名       | `string`                                                     | -         |
+
+### Checkbox.Group Props
+
+| 参数     | 说明                   | 类型                                     | 默认值 |
+| -------- | ---------------------- | ---------------------------------------- | ------ |
+| value    | 当前选中的值           | `(string \| number)[]`                   | []     |
+| disabled | 是否禁用               | `boolean`                                | false  |
+| onChange | 选中值改变时的回调函数 | `(value?: (string \| number)[]) => void` | -      |
+
+## 注意事项
+
+1. Checkbox.Group 中的 Checkbox value 属性必须唯一
+2. 使用 Checkbox.Group 时,单个 Checkbox 的 onChange 会被 Group 接管
+3. type="button" 时会显示为按钮样式,没有勾选图标
+
+# Rate 评分
+
+评分组件,支持自定义评分样式。
+
+## 何时使用
+
+- 对评价进行展示
+- 对事物进行快速的评级操作
+
+## 基础用法
+
+```
+import { Rate } from '@kqinfo/ui'
+export default () => (
+<>
+{/ 基础用法 /}
+<Rate defaultValue={3} />
+{/ 自定义颜色 /}
+<Rate defaultValue={3} activeColor="red" defaultColor="#eee" />
+{/ 自定义大小和间距 /}
+<Rate defaultValue={3} size={30} gutter="10px" />
+{/ 禁用状态 /}
+<Rate value={3} disabled />
+</>
+)
+```
+
+## API
+
+| 参数         | 说明                   | 类型                                         | 默认值        |
+| ------------ | ---------------------- | -------------------------------------------- | ------------- |
+| value        | 当前评分值             | `number`                                     | -             |
+| defaultValue | 默认评分值             | `number`                                     | 0             |
+| disabled     | 是否禁用               | `boolean`                                    | false         |
+| gutter       | 图标间距               | `string`                                     | '0.4em'       |
+| size         | 图标大小               | `string \| number`                           | -             |
+| onChange     | 评分改变时的回调       | `(value: number) => void`                    | -             |
+| iconName     | 评分图标名称           | `IconFontNames`                              | 'kq-xingxing' |
+| maxValue     | 最大评分值             | `number`                                     | 5             |
+| activeColor  | 选中时的颜色           | `string`                                     | 主题色        |
+| defaultColor | 未选中时的颜色         | `string`                                     | '#ccc'        |
+| renderItem   | 自定义评分项的渲染方法 | `(params: RenderItemParams) => ReactElement` | -             |
+
+### RenderItemParams
+
+| 参数     | 说明                  | 类型      |
+| -------- | --------------------- | --------- |
+| actived  | 当前是否选中          | `boolean` |
+| index    | 当前项的索引(从0开始) | `number`  |
+| maxValue | 最大评分值            | `number`  |
+
+## 自定义渲染
+
+可以通过 `renderItem` 自定义评分项的渲染内容:
+
+```
+import { Rate } from '@kqinfo/ui'
+export default () => (
+<Rate
+defaultValue={3}
+renderItem={({ actived, index }) => (
+<View
+style={{
+width: 20,
+height: 20,
+backgroundColor: actived ? 'gold' : '#eee',
+borderRadius: '50%'
+}}
+/>
+)}
+/>
+)
+```
+
