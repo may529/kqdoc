@@ -1581,3 +1581,211 @@ isEnd: boolean; // 是否结束
 3. 组件会在unmount时自动清理定时器
 4. 当autoStop为true时,倒计时结束后会自动停止更新
 
+# ColorText 彩色文本
+
+一个支持自定义颜色、下划线、字体大小和字重的文本组件。
+
+## 介绍
+
+ColorText 是基于 remax/one 的 Text 组件封装,用于显示带有自定义样式的文本内容。默认使用 ConfigProvider 中的 brandPrimary 作为文本颜色。
+
+## 使用示例
+<img width="64" alt="image" src="https://github.com/user-attachments/assets/dc1dd1fc-e33f-4da5-920d-dd81c369f73b" />
+
+```
+import { ColorText } from '@kqinfo/ui';
+export default () => {
+return (
+<>
+{/ 基础用法 /}
+<ColorText>默认文本</ColorText>
+{/ 自定义颜色 /}
+<ColorText color="#ff0000">红色文本</ColorText>
+{/ 带下划线 /}
+<ColorText underline>带下划线的文本</ColorText>
+{/ 自定义字体大小和字重 /}
+<ColorText fontSize="20px" fontWeight="bold">
+大号加粗文本
+</ColorText>
+</>
+);
+};
+```
+
+## API
+
+### Props
+
+| 参数       | 说明           | 类型                                | 默认值                           |
+| ---------- | -------------- | ----------------------------------- | -------------------------------- |
+| color      | 文本颜色       | `string`                            | ConfigProvider 中的 brandPrimary |
+| underline  | 是否显示下划线 | `boolean`                           | `false`                          |
+| fontSize   | 字体大小       | `string`                            | -                                |
+| fontWeight | 字重           | `React.CSSProperties['fontWeight']` | -                                |
+
+此外,组件还支持 remax/one 的 Text 组件的所有原生属性。
+
+## 注意事项
+
+1. 组件默认继承 ConfigProvider 中的 brandPrimary 作为文本颜色
+2. 当设置 underline 为 true 时,下划线颜色与文本颜色保持一致
+3. fontSize 和 fontWeight 可以通过传入合法的 CSS 值来自定义文本样式
+
+# Search 搜索组件
+
+一个功能完整的搜索输入框组件,支持搜索按钮、清除输入、适老模式等特性。
+
+## 代码示例
+
+### 基础用法
+<img width="309" alt="image" src="https://github.com/user-attachments/assets/84d84ab7-2bd5-4e7f-84f5-7a0fb3af7092" />
+
+
+```
+import { Search } from '@kqinfo/ui';
+export default () => (
+<Search
+placeholder="请输入搜索内容"
+onConfirm={value => console.log(value)}
+/>
+);
+```
+
+### 显示搜索按钮
+<img width="306" alt="image" src="https://github.com/user-attachments/assets/4f616c4b-f7e8-4f36-a6f2-f968a0af0eaa" />
+
+
+```
+import { Search } from '@kqinfo/ui';
+export default () => (
+<Search
+showBtn
+placeholder="请输入搜索内容"
+onConfirm={value => console.log(value)}
+/>
+);
+
+```
+
+### 适老模式
+
+```
+import { Search } from '@kqinfo/ui';
+export default () => (
+<Search
+elderly
+placeholder="请输入搜索内容"
+onConfirm={value => console.log(value)}
+/>
+);
+```
+
+## API
+
+### Props
+
+| 参数           | 说明                                | 类型                      | 默认值  |
+| -------------- | ----------------------------------- | ------------------------- | ------- |
+| showBtn        | 是否显示搜索按钮                    | `boolean`                 | `false` |
+| value          | 输入框的值                          | `string`                  | -       |
+| onChange       | 输入框内容变化时的回调              | `(value: string) => void` | -       |
+| onConfirm      | 点击搜索按钮或按下回车时的回调      | `(value: string) => void` | -       |
+| elderly        | 适老模式,开启后按钮文字和尺寸会变大 | `boolean`                 | `false` |
+| shadow         | 是否显示阴影效果                    | `boolean`                 | `false` |
+| iconColor      | 搜索图标的颜色                      | `string`                  | `#ccc`  |
+| className      | 组件容器类名                        | `string`                  | -       |
+| style          | 组件容器样式                        | `CSSProperties`           | -       |
+| inputWrapCls   | 输入框外层容器类名                  | `string`                  | -       |
+| inputWrapStyle | 输入框外层容器样式                  | `CSSProperties`           | -       |
+| inputCls       | 输入框类名                          | `string`                  | -       |
+| btnCls         | 搜索按钮类名                        | `string`                  | -       |
+| btnStyle       | 搜索按钮样式                        | `CSSProperties`           | -       |
+
+## 注意事项
+
+1. 组件默认继承了 Input 组件的所有 Props
+2. 适老模式会自动跟随 ConfigProvider 的配置
+3. 在 Web 端和原生端清除按钮的显示逻辑略有不同
+4. 支持自定义搜索按钮文案和样式
+
+
+# Pagination 分页组件
+
+一个简单易用的 React 分页组件,支持页码导航、快速跳转等功能。
+
+<img width="259" alt="image" src="https://github.com/user-attachments/assets/10a04dbc-2f48-4c6a-af92-7f47aae9dd12" />
+
+
+## 功能特点
+
+- 支持上一页/下一页导航
+- 显示当前页码状态
+- 支持快速跳转到首尾页
+- 页码区块化显示
+- 可自定义样式
+
+## Props
+
+| 参数              | 说明               | 类型                   | 默认值 |
+| ----------------- | ------------------ | ---------------------- | ------ |
+| current           | 当前页码           | number                 | -      |
+| total             | 总页数             | number                 | -      |
+| onChange          | 页码改变的回调函数 | (page: number) => void | -      |
+| className         | 容器类名           | string                 | -      |
+| buttonCls         | 按钮类名           | string                 | -      |
+| buttonDisabledCls | 按钮禁用时的类名   | string                 | -      |
+| style             | 容器样式           | React.CSSProperties    | -      |
+
+## 基础用法
+
+```
+import { Pagination } from '@kqinfo/ui';
+export default () => {
+const [current, setCurrent] = useState(1);
+return (
+<Pagination
+current={current}
+total={10}
+onChange={(page) => setCurrent(page)}
+/>
+);
+}
+```
+
+## 自定义样式
+
+```
+import { Pagination } from '@kqinfo/ui';
+export default () => {
+return (
+<Pagination
+current={1}
+total={10}
+onChange={(page) => console.log(page)}
+className="custom-pagination"
+buttonCls="custom-button"
+buttonDisabledCls="custom-button-disabled"
+style={{ margin: '20px 0' }}
+/>
+);
+}
+```
+
+## 特性说明
+
+1. 页码显示规则
+
+- 默认显示5个页码
+- 当前页码超出显示范围时,会显示快速前进/后退按钮
+- 始终显示第一页和最后一页的页码
+
+2. 按钮状态
+
+- 第一页时,上一页按钮禁用
+- 最后一页时,下一页按钮禁用
+
+3. 快速跳转
+
+- 点击 << 向前跳转5页
+- 点击 >> 向后跳转5页
+- 跳转不会超出总页数范围
