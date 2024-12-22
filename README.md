@@ -9,3 +9,4 @@
 7. 避免使用html原生标签, 要用到span的地方可以用remax的Text，要用到div的地方可以用用remax的View
 8. 尽量避免使用ColorText来包裹有颜色的文字
 9. 当区块内容被一个背景图所包裹时，建议才用BackgroundImg组件
+10. 看起来像tag的，可以采用Space包裹文字来实现
