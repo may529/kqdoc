@@ -7,3 +7,4 @@
 5. 图片地址应该本地才用如import img from 'xxx'的形式，图片的src={img} 或src={远程静态资源}
 6. 布局尽量使用kqui的Space组件
 7. 避免使用html原生标签, 要用到span的地方可以用remax的Text，要用到div的地方可以用用remax的View
+8. 尽量避免使用ColorText来包裹有颜色的文字
