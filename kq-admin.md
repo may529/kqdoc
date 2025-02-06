@@ -65,6 +65,8 @@ my-app/
 - 表单组件暴露`value`和 onChange
 - parsec-admin是基于antd封装的，当parsec-admin 组件不满足需求时，可使用antd组件来完成
 
+# crud表格页
+```
 import {
   actionConfirm,
   ActionsWrap,
@@ -224,7 +226,7 @@ export default () => {
     />
   );
 };
-
+```
 
 
 # actionConfirm
