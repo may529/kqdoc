@@ -65,6 +65,168 @@ my-app/
 - 表单组件暴露`value`和 onChange
 - parsec-admin是基于antd封装的，当parsec-admin 组件不满足需求时，可使用antd组件来完成
 
+import {
+  actionConfirm,
+  ActionsWrap,
+  DateShow,
+  DayRangePicker,
+  handleSubmit,
+  LinkButton,
+  TableList,
+  useModal
+} from 'parsec-admin';
+import React from 'react';
+import { useHistory } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
+import apis from '../api';
+import { getAddress } from '@src/utils/address-options';
+
+export default () => {
+  const history = useHistory();//引入history 方便按钮添加路由跳转
+  const { id } = useParams<{ id: string }>();//获取路由地址传参
+  // 用户详情
+  const {
+    data: { data }, //解构出接口请求返回的数据
+    request: getUserDetail, //定义一个方法，别处通过 getUserDetail() 获取用户详情
+    loading,//请求时的loading状态变量，用于页面渲染Loading
+  } = apis.userDetail({
+    params: {//请求入参
+      id: id
+    },
+    initValue: {},//初始值
+    needInit: !!id //是否页面加载就请求
+  });
+
+  // 修改用户姓名和手机号
+  const switchModalVisible = useModal(({ id }) => ({
+    title: `${id ? '编辑' : '新增'}用户信息`,//模态窗标题
+    onSubmit: ({ ...values }: any) =>
+      handleSubmit(() => { //使用handleSubmit提交信息后，表格会自动更新
+        return id
+          ? apis.updateNurse.request({ ...values })
+          : apis.addNurse.request({ ...values });
+      }),
+    items: [
+      {
+        label: 'id',
+        name: 'id',
+        render: false
+      },
+      {
+        label: '用户姓名', //表单项label
+        name: 'truename',//表单项name
+        required: true //必填
+      },
+      {
+        label: '用户电话',
+        name: 'phone',
+        required: true
+      }
+    ]
+  }));
+
+  return (
+    <TableList
+      tableTitle={'客户列表'} //表格标题
+      showTool={false} //表格工具栏，不怎么用
+      showExpand={false} //显示折叠展开
+      exportExcelButton={false} //打开表格数据导出功能
+      scroll={{ x: 1800 }} //横向超过1800宽度出滚动
+      action={
+        <Button type='primary' onClick={() => switchModalVisible()}>
+          新增
+        </Button>
+      }
+      columns={[
+        {
+          title: '用户id',
+          dataIndex: 'id',
+          align: 'center',
+          width: 180
+        },
+        {
+          title: '创建时间',//列表标题
+          dataIndex: 'createdAt',//列表字段
+          align: 'center',//对齐方式
+          width: 120,//列表宽度
+          render: v => <DateShow>{v}</DateShow>,//列表渲染
+          searchIndex: ['createdAtBegin', 'createdAtEnd'],//作为顶部综合查询时的字段
+          search: <DayRangePicker valueFormat='YYYY-MM-DD HH:mm:ss' />,//查询项的渲染
+          searchSort: 2 //查询项的排列顺序
+        },
+        {
+          title: '用户姓名',
+          dataIndex: 'truename',
+          align: 'center',
+          width: 120,          search: true,
+          searchSort: 1
+        },
+        {
+          title: '状态',
+          align: 'center',
+          dataIndex: 'enable', //状态 ture启用，false 禁用
+          width: 80,
+          render: v => (v === true ? '启用' : v === false ? '禁用' : '-')
+        },
+        {
+          title: '操作',
+          excelRender: false,
+          align: 'center',
+          fixed: 'right',
+          width: 120,
+          render: (v, record: any) => (
+            <ActionsWrap max={8}>
+              <LinkButton
+                onClick={() => history.push('/userList/' + record.id)}>
+                查看
+              </LinkButton>
+              <LinkButton
+                onClick={() => {
+                  switchModalVisible({ //获得行数据打开模态窗
+                    id: record.id,
+                    truename: record.truename,
+                    phone: record.phone
+                  });
+                }}>
+                编辑
+              </LinkButton>
+              <LinkButton
+                onClick={() => {
+                  actionConfirm(//弹出确认对话框
+                    () =>
+                      apis.enableUser.request({
+                        id: record.id,
+                        enable: !record.enable
+                      }),
+                    record.enable ? '禁用' : '启用'
+                  );
+                }}>
+                {record.enable ? '禁用' : '启用'}
+              </LinkButton>
+            </ActionsWrap>
+          )
+        }
+      ]}
+      getList={({ pagination: { current = 1, pageSize = 10 }, params }) => {
+        return apis.userList
+          .request({
+            pageNum: current, //页码
+            numPerPage: pageSize, //单页数据条数
+            ...params //综合查询入参
+          })
+          .then(data => {
+            return {
+              list: data.data.recordList || [], //返回数据列表
+              total: data.data.totalCount || 0 //返回数据总数
+            };
+          });
+      }}
+    />
+  );
+};
+
+
+
 # actionConfirm
 
 ## 操作确认
