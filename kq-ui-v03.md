@@ -51,6 +51,7 @@ const App = (props) => {
 
 ## 开发注意项
 
+- 常用布局尽可能用Space组件，他相当于flex布局
 - 样式不要嵌套
 - 样式用`less-modules`
 - 代码中尽可能用CSS Modules，比如使用了 styles.xxx 这种方式来定义className
